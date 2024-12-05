@@ -1,0 +1,74 @@
+package ute.shop.controller;
+
+import java.io.IOException;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import ute.shop.entity.User;
+import ute.shop.services.IUserService;
+import ute.shop.services.implement.UserServiceImpl;
+
+@SuppressWarnings("serial")
+@WebServlet(urlPatterns = "/login") // Ensure the URL matches the form action
+public class LoginController extends HttpServlet {
+
+	private static final String COOKIE_REMEMBER = "email";
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html");
+		resp.setCharacterEncoding("UTF-8");
+		req.setCharacterEncoding("UTF-8");
+
+		String email = req.getParameter("email");
+		String password = req.getParameter("password");
+		boolean isRememberMe = "on".equals(req.getParameter("remember"));
+
+		String alertMsg = "";
+		if (email.isEmpty() || password.isEmpty()) {
+			alertMsg = "Tài khoản hoặc mật khẩu không được rỗng";
+			req.setAttribute("alert", alertMsg);
+			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+			return;
+		}
+
+		IUserService service = new UserServiceImpl();
+		User user = service.login(email, password);
+		if (user != null) {
+			// Lưu thông tin người dùng vào session
+			HttpSession session = req.getSession(true);
+			session.setAttribute("account", user);
+			session.setAttribute("userId", user.get_id());
+
+			// Nếu người dùng chọn "Remember Me"
+			if (isRememberMe) {
+				saveRemeberMe(resp, email);
+			}
+
+			// Điều hướng đến trang đích chính (ví dụ: trang chủ hoặc dashboard)
+			resp.sendRedirect(req.getContextPath() + "/home"); // Thay "/home" bằng trang đích thực tế
+		} else {
+			alertMsg = "Tài khoản hoặc mật khẩu không đúng";
+			req.setAttribute("alert", alertMsg);
+			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+		}
+	}
+
+	private void saveRemeberMe(HttpServletResponse response, String email) {
+		Cookie cookie = new Cookie(COOKIE_REMEMBER, email);
+		cookie.setMaxAge(30 * 60); // Cookie tồn tại trong 30 phút
+		cookie.setPath("/"); // Cookie có hiệu lực trên toàn bộ website
+		response.addCookie(cookie);
+	}
+
+}

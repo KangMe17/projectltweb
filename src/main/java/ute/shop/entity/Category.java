@@ -24,12 +24,22 @@ public class Category {
 	@Column(nullable = false, unique = true, length = 32)
 	private String name;
 
-	@Column(unique = true)
+	@Column(unique = true, length = 128) // Giới hạn độ dài của slug
 	private String slug;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "parent_id") // Đảm bảo tên cột trong cơ sở dữ liệu
 	private Category parentCategory;
+
+	@OneToMany(mappedBy = "parentCategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Category> subCategories = new ArrayList<>();
+
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Product> products = new ArrayList<>();
+
+	@ManyToMany
+	@JoinTable(name = "category_style", joinColumns = @JoinColumn(name = "category_id"), inverseJoinColumns = @JoinColumn(name = "style_id"))
+	private List<Style> styles = new ArrayList<>();
 
 	private String image;
 
@@ -37,30 +47,22 @@ public class Category {
 	private Boolean isDeleted = false;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(updatable = false)
+	@Column(nullable = false, updatable = false)
 	private Date createdAt;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable = false)
 	private Date updatedAt;
 
 	@PrePersist
 	protected void onCreate() {
 		createdAt = new Date();
+		updatedAt = new Date();
 	}
 
 	@PreUpdate
 	protected void onUpdate() {
 		updatedAt = new Date();
 	}
-
-	@OneToMany(mappedBy = "parentCategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Category> subCategories = new ArrayList<>(); // Một Category có thể có nhiều danh mục con
-
-	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Product> products = new ArrayList<>(); // Một Category có thể có nhiều Product
-	
-	@ManyToMany
-	@JoinTable(name = "category_style", joinColumns = @JoinColumn(name = "category_id"), inverseJoinColumns = @JoinColumn(name = "style_id"))
-	private List<Style> styles = new ArrayList<>(); // Một Category có thể có nhiều Style
 
 }

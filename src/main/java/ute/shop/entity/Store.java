@@ -30,9 +30,8 @@ public class Store {
 	@Column(unique = true)
 	private String slug;
 
-	// One-to-One Relationship with User
 	@OneToOne
-	@JoinColumn(name = "ownerId", referencedColumnName = "_id", nullable = false)
+	@JoinColumn(name = "owner_id", referencedColumnName = "_id", nullable = false)
 	private User owner;
 
 	@ManyToMany
@@ -70,6 +69,9 @@ public class Store {
 	@PrePersist
 	protected void onCreate() {
 		createdAt = new Date();
+		if (this.slug == null || this.slug.isEmpty()) {
+			this.slug = name.toLowerCase().replace(" ", "-");
+		}
 	}
 
 	@PreUpdate
@@ -89,20 +91,17 @@ public class Store {
 	@OneToMany(mappedBy = "store")
 	private List<Review> reviews = new ArrayList<>();
 
-	// One-to-One relationship with StoreLevel
 	@OneToOne
 	@JoinColumn(name = "storeLevel_id", referencedColumnName = "_id", nullable = false)
 	private StoreLevel storeLevel;
 
-	// One-to-One relationship with Commission
 	@OneToOne
 	@JoinColumn(name = "commission_id", referencedColumnName = "_id", nullable = false)
 	private Commission commission;
 
-	// One-to-Many relationship with UserFollowStore
 	@OneToMany(mappedBy = "store")
 	private List<UserFollowStore> followers = new ArrayList<>();
 
 	@OneToMany(mappedBy = "store")
-	private List<Transaction> transactions = new ArrayList<>(); // Mối quan hệ One-to-Many với Transaction
+	private List<Transaction> transactions = new ArrayList<>();
 }

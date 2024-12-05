@@ -29,9 +29,6 @@ public class User {
 	private String lastname;
 
 	@Column(unique = true)
-	private String slug;
-
-	@Column(unique = true)
 	private String id_card;
 
 	@Column(unique = true)
@@ -47,24 +44,17 @@ public class User {
 	private Boolean isPhoneActive = false;
 
 	@Column(nullable = false)
-	private String salt;
-
-	@Column(nullable = false)
-	private String hashed_password;
+	private String password;
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Role role = Role.USER;
 
-	@ElementCollection
-	@Column(length = 200)
-	private List<String> addresses = new ArrayList<>();
+	@Column(nullable = true, length = 255)
+	private String address;
 
 	private String avatar;
 	private String cover;
-
-	@Column(nullable = false)
-	private Integer point = 0;
 
 	@Column(nullable = false)
 	private double e_wallet = 0.0;
@@ -87,13 +77,13 @@ public class User {
 	}
 
 	public enum Role {
-		USER, ADMIN
+		USER, ADMIN;
+
+		public static Role fromString(String role) {
+			return Role.valueOf(role.toUpperCase());
+		}
 	}
 
-	// Relationship to UserLevel
-	@ManyToOne
-	@JoinColumn(name = "userLevel_id", referencedColumnName = "_id")
-	private UserLevel userLevel;
 	// One-to-One Relationship to Store
 	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Store ownedStore;
@@ -101,16 +91,21 @@ public class User {
 	@ManyToMany(mappedBy = "staffs")
 	private List<Store> staffedStores;
 
-	@OneToMany(mappedBy = "user") // MappedBy points to the field in Transaction referencing User
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Transaction> transactions;
-	@OneToMany(mappedBy = "user") // Mối quan hệ One-to-Many với Review
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Review> reviews = new ArrayList<>();
-	@OneToMany(mappedBy = "user") // MappedBy chỉ đến thuộc tính 'user' trong UserFollowStore
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<UserFollowStore> userFollowStores = new ArrayList<>();
-	@OneToMany(mappedBy = "user") // Mối quan hệ One-to-Many với Order
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Order> orders = new ArrayList<>();
-	@OneToMany(mappedBy = "user")
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Cart> carts = new ArrayList<>();
+
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<UserFollowProduct> userFollowProducts = new ArrayList<>();
 
