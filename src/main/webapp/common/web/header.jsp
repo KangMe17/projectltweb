@@ -75,7 +75,7 @@
 							<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
 							<li><a href="/user/orders"><i class="fa fa-crosshairs"></i>
 									Checkout</a></li>
-							<li><a href="cart.html"><i class="fa fa-shopping-cart"></i>
+							<li><a href="/user/cart"><i class="fa fa-shopping-cart"></i>
 									Cart</a></li>
 							<li><c:choose>
 									<c:when test="${not empty sessionScope.account}">

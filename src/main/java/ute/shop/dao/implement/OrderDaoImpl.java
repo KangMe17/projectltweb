@@ -66,4 +66,46 @@ public class OrderDaoImpl implements IOrderDao {
 			em.close();
 		}
 	}
+
+	@Override
+	public boolean placeOrder(Order order) {
+		EntityManager em = JPAConfig.getEntityManager();
+		EntityTransaction trans = em.getTransaction();
+		try {
+			trans.begin();
+			em.persist(order); // Chèn đơn hàng vào cơ sở dữ liệu
+			trans.commit();
+			return true;
+		} catch (Exception e) {
+			trans.rollback();
+			throw new RuntimeException("Error placing order", e);
+		} finally {
+			em.close();
+		}
+	}
+
+	@Override
+	public boolean makePayment(int orderId) {
+		EntityManager em = JPAConfig.getEntityManager();
+		EntityTransaction trans = em.getTransaction();
+		try {
+			trans.begin();
+			Order order = em.find(Order.class, orderId);
+			if (order != null) {
+				order.setIsPaidBefore(true);
+				order.setStatus(OrderStatus.PROCESSED); // Cập nhật trạng thái thanh toán
+				trans.commit();
+				return true;
+			} else {
+				trans.rollback();
+				return false; // Không tìm thấy đơn hàng
+			}
+		} catch (Exception e) {
+			trans.rollback();
+			throw new RuntimeException("Error processing payment for order", e);
+		} finally {
+			em.close();
+		}
+	}
+
 }

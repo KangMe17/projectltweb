@@ -29,6 +29,12 @@
 									<input type="hidden" name="orderId" value="${order._id}" />
 									<button type="submit">Hủy</button>
 								</form>
+							</c:if> <c:if test="${order.status == 'DELIVERED'}">
+								<form action="${pageContext.request.contextPath}/review/add"
+									method="get" style="display: inline;">
+									<input type="hidden" name="orderId" value="${order._id}" />
+									<button type="submit">Đánh giá</button>
+								</form>
 							</c:if></td>
 					</tr>
 				</c:forEach>

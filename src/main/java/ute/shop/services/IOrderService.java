@@ -13,4 +13,8 @@ public interface IOrderService {
 	boolean cancelOrder(int orderId);
 
 	Order findById(int orderId);
+
+	boolean placeOrder(Order order);
+
+	boolean makePayment(int orderId);
 }

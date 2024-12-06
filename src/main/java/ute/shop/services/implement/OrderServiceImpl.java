@@ -46,4 +46,23 @@ public class OrderServiceImpl implements IOrderService {
 			throw new RuntimeException("Error finding order by ID: " + orderId, e);
 		}
 	}
+
+	@Override
+	public boolean placeOrder(Order order) {
+		if (order == null || order.getUser() == null || order.getStore() == null || order.getDelivery() == null) {
+			throw new IllegalArgumentException("Order or required fields cannot be null");
+		}
+		return orderDao.placeOrder(order);
+	}
+
+	@Override
+	public boolean makePayment(int orderId) {
+		Order order = orderDao.findById(orderId);
+		if (order == null) {
+			throw new IllegalArgumentException("Order not found with ID: " + orderId);
+		}
+		order.setIsPaidBefore(true); // Cập nhật trạng thái thanh toán
+		return orderDao.updateOrderStatus(orderId, OrderStatus.PROCESSED);
+	}
+
 }

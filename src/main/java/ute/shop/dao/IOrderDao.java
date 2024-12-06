@@ -14,4 +14,9 @@ public interface IOrderDao {
 	boolean cancelOrder(int orderId);
 
 	Order findById(int orderId);
+
+	boolean placeOrder(Order order);
+
+	boolean makePayment(int orderId);
+
 }

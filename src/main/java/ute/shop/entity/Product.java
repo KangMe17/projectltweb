@@ -17,6 +17,11 @@ import java.util.List;
 @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
 public class Product {
 
+	// Constructor chỉ nhận ID
+	public Product(int id) {
+		this._id = id;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int _id;
