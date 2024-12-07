@@ -48,6 +48,13 @@ public class Cart {
 		updatedAt = new Date();
 	}
 
-	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<CartItem> cartItems = new ArrayList<>(); // Một Cart có thể có nhiều CartItem
+
+	public double getTotalAmount() {
+		if (cartItems == null || cartItems.isEmpty()) {
+			return 0.0;
+		}
+		return cartItems.stream().mapToDouble(cartItems -> cartItems.getCount() * cartItems.getProduct().getPrice()).sum();
+	}
 }

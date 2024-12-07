@@ -50,6 +50,6 @@ public class Delivery {
 		updatedAt = new Date();
 	}
 
-	@OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
-	private Order order; // Tham chiếu đến Order (nếu cần)
+	@OneToOne(mappedBy = "delivery", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Order order;
 }

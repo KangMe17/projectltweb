@@ -13,4 +13,9 @@ public interface IOrderService {
 	boolean cancelOrder(int orderId);
 
 	Order findById(int orderId);
+
+	Order placeOrder(int userId, String address, String phone, String paymentMethod) throws Exception;
+
+	boolean makePayment(int orderId);
+
 }

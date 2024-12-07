@@ -50,7 +50,7 @@ public class Commission {
 	}
 
 	// Optional: One-to-One relationship with Store
-	@OneToOne(mappedBy = "commission")
+	@OneToOne(mappedBy = "commission", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Store store;
 
 	@OneToMany(mappedBy = "commission", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -13,7 +13,7 @@ import ute.shop.services.implement.OrderServiceImpl;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = { "/orders", "/orders/cancel", "/orders/status" })
+@WebServlet(urlPatterns = { "/orders", "/orders/cancel", "/orders/status", "/orders/place", "/orders/payment" })
 public class OrderController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -32,8 +32,51 @@ public class OrderController extends HttpServlet {
 		case "/orders":
 			showOrderHistory(req, resp);
 			break;
+		case "/orders/place":
+			showPlaceOrderForm(req, resp);
+			break;
+		case "/orders/payment":
+			showPaymentForm(req, resp);
+			break;
 		default:
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+		}
+	}
+
+	private void showPlaceOrderForm(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// Kiểm tra xem người dùng có đăng nhập hay không
+		Integer userId = (Integer) req.getSession().getAttribute("userId");
+
+		if (userId == null) {
+			// Nếu người dùng chưa đăng nhập, chuyển đến trang đăng nhập
+			resp.sendRedirect(req.getContextPath() + "/login.jsp");
+			return;
+		}
+
+		// Hiển thị trang đặt hàng
+		req.getRequestDispatcher("/views/placeOrder.jsp").forward(req, resp);
+	}
+
+	private void showPaymentForm(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// Kiểm tra xem người dùng có đăng nhập hay không
+		Integer userId = (Integer) req.getSession().getAttribute("userId");
+
+		if (userId == null) {
+			// Nếu người dùng chưa đăng nhập, chuyển đến trang đăng nhập
+			resp.sendRedirect(req.getContextPath() + "/login.jsp");
+			return;
+		}
+
+		// Lấy thông tin đơn hàng từ service (giả sử đơn hàng của người dùng đã có)
+		try {
+			List<Order> orders = orderService.getAllOrdersByUser(userId);
+			req.setAttribute("orders", orders);
+			req.getRequestDispatcher("/views/payment.jsp").forward(req, resp);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unable to fetch order details.");
 		}
 	}
 
@@ -47,6 +90,12 @@ public class OrderController extends HttpServlet {
 			break;
 		case "/orders/status":
 			updateOrderStatus(req, resp);
+			break;
+		case "/orders/payment":
+			makePayment(req, resp);
+			break;
+		case "/orders/place":
+			placeOrder(req, resp); // Thêm xử lý đặt hàng
 			break;
 		default:
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -114,6 +163,54 @@ public class OrderController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendRedirect(req.getContextPath() + "/orders?error=update");
+		}
+	}
+
+	private void placeOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		try {
+			Integer userId = (Integer) req.getSession().getAttribute("userId");
+
+			if (userId == null) {
+				resp.sendRedirect(req.getContextPath() + "/login.jsp");
+				return;
+			}
+
+			// Lấy thông tin từ form
+			String address = req.getParameter("address");
+			String phone = req.getParameter("phone");
+			String paymentMethod = req.getParameter("paymentMethod");
+
+			// Gọi service để đặt hàng
+			Order order = orderService.placeOrder(userId, address, phone, paymentMethod);
+
+			if (order != null) {
+				resp.sendRedirect(req.getContextPath() + "/orders?success=place");
+			} else {
+				resp.sendRedirect(req.getContextPath() + "/cart?error=place");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.sendRedirect(req.getContextPath() + "/cart?error=place");
+		}
+	}
+
+	private void makePayment(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		try {
+			int orderId = Integer.parseInt(req.getParameter("orderId"));
+
+			// Gọi service để thực hiện thanh toán
+			boolean isPaid = orderService.makePayment(orderId);
+
+			if (isPaid) {
+				resp.sendRedirect(req.getContextPath() + "/orders?success=payment");
+			} else {
+				resp.sendRedirect(req.getContextPath() + "/orders?error=payment");
+			}
+		} catch (NumberFormatException e) {
+			resp.sendRedirect(req.getContextPath() + "/orders?error=invalid-order-id");
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.sendRedirect(req.getContextPath() + "/orders?error=payment");
 		}
 	}
 }
