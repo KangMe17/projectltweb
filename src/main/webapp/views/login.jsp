@@ -16,7 +16,7 @@
 						<c:if test="${alert !=null}">
 							<h3 class="alert alertdanger">${alert}</h3>
 						</c:if>
-						<form action="/user/login" method="post">
+						<form action="/UTEShop/login" method="post">
 							<input type="email" name="email" placeholder="Email Address"
 								required />
 							<!-- Email input -->

@@ -2,68 +2,135 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<h1>Giỏ hàng của bạn</h1>
-
-<c:choose>
-	<c:when
-		test="${cart != null && cart.cartItems != null && !cart.cartItems.isEmpty()}">
-		<table border="1" cellpadding="10" cellspacing="0">
-			<thead>
-				<tr>
-					<th>Sản phẩm</th>
-					<th>Giá</th>
-					<th>Số lượng</th>
-					<th>Tổng cộng</th>
-					<th>Hành động</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="item" items="${cart.cartItems}">
-					<tr>
-						<td>${item.product.name}</td>
-						<td>${item.product.price}</td>
-						<td>
-							<form action="${pageContext.request.contextPath}/cart/update"
-								method="post">
-								<input type="hidden" name="productId"
-									value="${item.product._id}"> <input type="number"
-									name="count" value="${item.count}" min="1" required>
-								<button type="submit">Cập nhật</button>
-							</form>
-						</td>
-						<td>${item.product.price * item.count}</td>
-						<td>
-							<form action="${pageContext.request.contextPath}/cart/remove"
-								method="post">
-								<input type="hidden" name="productId"
-									value="${item.product._id}">
-								<button type="submit" class="btn-danger">Xóa</button>
-							</form>
-						</td>
+<section id="cart_items">
+	<div class="container">
+		<div class="breadcrumbs">
+			<ol class="breadcrumb">
+				<li><a href="#">Home</a></li>
+				<li class="active">Shopping Cart</li>
+			</ol>
+		</div>
+		<div class="table-responsive cart_info">
+			<table class="table table-condensed">
+				<thead>
+					<tr class="cart_menu">
+						<td class="image">Item</td>
+						<td class="description"></td>
+						<td class="price">Price</td>
+						<td class="quantity">Quantity</td>
+						<td class="total">Total</td>
+						<td></td>
 					</tr>
-				</c:forEach>
-			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="3"><strong>Tổng cộng:</strong></td>
-					<td colspan="2">
-						<!-- Calculate total sum of the cart items --> <c:set
-							var="totalSum" value="0" /> <c:forEach var="item"
-							items="${cart.cartItems}">
-							<c:set var="totalSum"
-								value="${totalSum + (item.product.price * item.count)}" />
-						</c:forEach> ${totalSum}
-					</td>
-				</tr>
-			</tfoot>
-		</table>
-		<button
-			onclick="window.location.href='${pageContext.request.contextPath}/checkout'">Thanh
-			toán</button>
-	</c:when>
-	<c:otherwise>
-		<p>Giỏ hàng của bạn đang trống.</p>
-		<a href="${pageContext.request.contextPath}/products">Tiếp tục mua
-			sắm</a>
-	</c:otherwise>
-</c:choose>
+				</thead>
+				<tbody>
+					<c:forEach var="item" items="${cart.cartItems}">
+						<tr>
+							<td class="cart_product"><img src="${product.listImages[0]}"
+								alt=""></td>
+							<td class="cart_description">
+								<h4>
+									<a href="">${item.product.name}</a>
+								</h4>
+								<p>Mã sản phẩm: ${item.product._id}</p>
+							</td>
+							<td class="cart_price">
+								<p>${item.product.price}</p>
+							</td>
+							<td class="cart_quantity">
+								<form action="${pageContext.request.contextPath}/cart/update"
+									method="post">
+									<input type="hidden" name="productId"
+										value="${item.product._id}">
+									<div class="cart_quantity_button">
+										<input class="cart_quantity_input" type="number" name="count"
+											value="${item.count}" min="1" required>
+									</div>
+									<button type="submit" class="btn btn-default">Update</button>
+								</form>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">${item.product.price * item.count}</p>
+							</td>
+							<td class="cart_delete">
+								<form action="${pageContext.request.contextPath}/cart/remove"
+									method="post">
+									<input type="hidden" name="productId"
+										value="${item.product._id}">
+									<button type="submit" class="btn-danger">
+										<i class="fa fa-times"></i>
+									</button>
+								</form>
+							</td>
+						</tr>
+
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
+
+<section id="do_action">
+	<div class="container">
+		<div class="heading">
+			<h3>What would you like to do next?</h3>
+			<p>Choose if you have a discount code or reward points you want
+				to use or would like to estimate your delivery cost.</p>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="chose_area">
+					<ul class="user_option">
+						<li><input type="checkbox"> <label>Use Coupon
+								Code</label></li>
+						<li><input type="checkbox"> <label>Use Gift
+								Voucher</label></li>
+						<li><input type="checkbox"> <label>Estimate
+								Shipping & Taxes</label></li>
+					</ul>
+					<ul class="user_info">
+						<li class="single_field"><label>Country:</label> <select>
+								<option>United States</option>
+								<option>Bangladesh</option>
+								<option>UK</option>
+								<option>India</option>
+								<option>Pakistan</option>
+								<option>Ucrane</option>
+								<option>Canada</option>
+								<option>Dubai</option>
+						</select></li>
+						<li class="single_field"><label>Region / State:</label> <select>
+								<option>Select</option>
+								<option>Dhaka</option>
+								<option>London</option>
+								<option>Dillih</option>
+								<option>Lahore</option>
+								<option>Alaska</option>
+								<option>Canada</option>
+								<option>Dubai</option>
+						</select></li>
+						<li class="single_field zip-field"><label>Zip Code:</label> <input
+							type="text"></li>
+					</ul>
+					<a class="btn btn-default update" href="#">Get Quotes</a> <a
+						class="btn btn-default check_out" href="#">Continue</a>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="total_area">
+					<c:forEach var="item" items="${cart.cartItems}">
+						<ul>
+							<li>Cart Sub Total <span>${totalSum}</span></li>
+							<li>Eco Tax <span>$2</span></li>
+							<li>Shipping Cost <span>Free</span></li>
+							<li>Total <span>${item.product.price * item.count + 2}</span></li>
+						</ul>
+						<a class="btn btn-default update"
+							href="${pageContext.request.contextPath}/orders/place">Proceed to
+							Checkout</a>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

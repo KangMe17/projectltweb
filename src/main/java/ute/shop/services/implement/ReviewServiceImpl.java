@@ -12,27 +12,22 @@ public class ReviewServiceImpl implements IReviewService {
 	private final IReviewDao reviewDao = new ReviewDaoImpl();
 
 	@Override
-	public Review addReview(Review review) {
-		return reviewDao.save(review);
+	public List<Review> getReviewsByProduct(int productId) {
+		try {
+			return reviewDao.findByProductId(productId);
+		} catch (Exception e) {
+			throw new RuntimeException("Error fetching reviews for product ID: " + productId, e);
+		}
 	}
 
 	@Override
-	public Review updateReview(Review review) {
-		return reviewDao.update(review);
+	public List<Review> getReviewsByOrderAndStore(int orderId, int storeId) {
+		return reviewDao.getReviewsByOrderAndStore(orderId, storeId);
 	}
 
 	@Override
-	public void deleteReview(int reviewId) {
-		reviewDao.delete(reviewId);
+	public boolean addReview(Review review) {
+		return reviewDao.addReview(review);
 	}
 
-	@Override
-	public List<Review> getReviewsByProductId(int productId) {
-		return reviewDao.findByProductId(productId);
-	}
-
-	@Override
-	public List<Review> getReviewsByUserId(int userId) {
-		return reviewDao.findByUserId(userId);
-	}
 }

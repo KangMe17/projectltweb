@@ -5,13 +5,9 @@ import ute.shop.entity.Review;
 import java.util.List;
 
 public interface IReviewService {
-	Review addReview(Review review);
+	List<Review> getReviewsByProduct(int productId);
 
-	Review updateReview(Review review);
+	boolean addReview(Review review);
 
-	void deleteReview(int reviewId);
-
-	List<Review> getReviewsByProductId(int productId);
-
-	List<Review> getReviewsByUserId(int userId);
+	List<Review> getReviewsByOrderAndStore(int orderId, int storeId);
 }

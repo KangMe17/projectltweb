@@ -9,6 +9,7 @@ import jakarta.persistence.TypedQuery;
 import ute.shop.config.JPAConfig;
 import ute.shop.dao.IOrderDao;
 import ute.shop.entity.Order;
+import ute.shop.entity.OrderItem;
 import ute.shop.entity.OrderStatus;
 
 public class OrderDaoImpl implements IOrderDao {
@@ -103,6 +104,39 @@ public class OrderDaoImpl implements IOrderDao {
 		} catch (Exception e) {
 			trans.rollback();
 			throw new RuntimeException("Error processing payment for order", e);
+		} finally {
+			em.close();
+		}
+	}
+
+	@Override
+	public void saveOrderItem(OrderItem orderItem) {
+		EntityManager em = JPAConfig.getEntityManager();
+		EntityTransaction trans = em.getTransaction();
+		try {
+			trans.begin();
+			em.persist(orderItem); // Lưu OrderItem vào cơ sở dữ liệu
+			trans.commit();
+		} catch (Exception e) {
+			trans.rollback();
+			throw new RuntimeException("Error saving order item", e);
+		} finally {
+			em.close();
+		}
+	}
+
+	@Override
+	public Order save(Order order) {
+		EntityManager em = JPAConfig.getEntityManager();
+		EntityTransaction trans = em.getTransaction();
+		try {
+			trans.begin();
+			em.persist(order); // Lưu đối tượng Order vào cơ sở dữ liệu
+			trans.commit();
+			return order; // Trả về đối tượng Order vừa lưu
+		} catch (Exception e) {
+			trans.rollback();
+			throw new RuntimeException("Error saving order", e);
 		} finally {
 			em.close();
 		}

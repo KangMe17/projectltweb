@@ -3,6 +3,7 @@ package ute.shop.dao;
 import java.util.List;
 
 import ute.shop.entity.Order;
+import ute.shop.entity.OrderItem;
 import ute.shop.entity.OrderStatus;
 
 public interface IOrderDao {
@@ -18,5 +19,9 @@ public interface IOrderDao {
 	boolean placeOrder(Order order);
 
 	boolean makePayment(int orderId);
+
+	void saveOrderItem(OrderItem orderItem);
+
+	Order save(Order order);
 
 }

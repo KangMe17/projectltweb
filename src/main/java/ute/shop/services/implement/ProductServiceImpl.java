@@ -24,4 +24,9 @@ public class ProductServiceImpl implements IProductService {
 		}
 		return product.getQuantity() >= count;
 	}
+
+	@Override
+	public Product findById(int productId) {
+		return findProductById(productId);
+	}
 }

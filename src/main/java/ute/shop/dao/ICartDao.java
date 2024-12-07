@@ -1,6 +1,7 @@
 package ute.shop.dao;
 
 import ute.shop.entity.Cart;
+import ute.shop.entity.CartItem;
 import ute.shop.entity.User;
 
 public interface ICartDao {
@@ -14,4 +15,9 @@ public interface ICartDao {
 
 	Cart findById(int cartId);
 
+	CartItem findCartItemByCartAndProduct(int cartId, int productId);
+
+	CartItem addOrUpdateCartItem(CartItem cartItem);
+
+	boolean removeCartItem(CartItem cartItem);
 }

@@ -6,6 +6,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ute.shop.entity.Cart;
+import ute.shop.entity.CartItem;
+import ute.shop.entity.Order;
+import ute.shop.entity.OrderItem;
 import ute.shop.entity.User;
 import ute.shop.services.ICartService;
 import ute.shop.services.IProductService;
@@ -13,13 +16,16 @@ import ute.shop.services.implement.CartServiceImpl;
 import ute.shop.services.implement.ProductServiceImpl;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-@SuppressWarnings("serial")
-@WebServlet(urlPatterns = { "/cart", "/cart/add", "/cart/update", "/cart/view" })
+@WebServlet(urlPatterns = { "/cart", "/cart/add", "/cart/update", "/cart/remove", "/cart/view"	 })
 public class CartController extends HttpServlet {
 
-	ICartService cartService = new CartServiceImpl();
-	IProductService productService = new ProductServiceImpl();
+	private static final long serialVersionUID = 1L;
+
+	private final ICartService cartService = new CartServiceImpl();
+	private final IProductService productService = new ProductServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -47,6 +53,9 @@ public class CartController extends HttpServlet {
 		case "/cart/update":
 			updateCart(req, resp);
 			break;
+		case "/cart/remove":
+			removeFromCart(req, resp);
+			break;
 		default:
 			resp.sendRedirect(req.getContextPath() + "/home");
 			break;
@@ -62,6 +71,7 @@ public class CartController extends HttpServlet {
 		}
 
 		Cart cart = cartService.getCartByUser(currentUser);
+		req.getSession().setAttribute("cart", cart);
 		req.setAttribute("cart", cart);
 		req.getRequestDispatcher("/views/cart.jsp").forward(req, resp);
 	}
@@ -78,25 +88,18 @@ public class CartController extends HttpServlet {
 			int productId = Integer.parseInt(req.getParameter("productId"));
 			int count = Integer.parseInt(req.getParameter("count"));
 
-			// Kiểm tra số lượng phải lớn hơn 0
 			if (count <= 0) {
-				resp.sendRedirect(req.getContextPath() + "/error?message=InvalidQuantity");
-				return;
+				throw new IllegalArgumentException("Số lượng phải lớn hơn 0.");
 			}
 
-			// Gọi hàm service để thêm hoặc cập nhật sản phẩm
 			Cart updatedCart = cartService.addOrUpdateCartItem(currentUser.get_id(), productId, count);
-
-			if (updatedCart != null) {
-				// Nếu cập nhật thành công, chuyển hướng đến trang xem giỏ hàng
-				resp.sendRedirect(req.getContextPath() + "/cart/view");
-			} else {
-				// Nếu không tìm thấy cart hoặc sản phẩm, trả về lỗi
-				resp.sendRedirect(req.getContextPath() + "/error?message=CartUpdateFailed");
-			}
+			req.getSession().setAttribute("cart", updatedCart);
+			resp.sendRedirect(req.getContextPath() + "/cart/view");
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			resp.sendRedirect(req.getContextPath() + "/error?message=InvalidInput");
+		} catch (IllegalArgumentException e) {
+			resp.sendRedirect(req.getContextPath() + "/error?message=" + e.getMessage());
 		}
 	}
 
@@ -112,26 +115,43 @@ public class CartController extends HttpServlet {
 			int productId = Integer.parseInt(req.getParameter("productId"));
 			int newCount = Integer.parseInt(req.getParameter("count"));
 
-			// Kiểm tra số lượng phải lớn hơn 0
 			if (newCount <= 0) {
-				resp.sendRedirect(req.getContextPath() + "/error?message=InvalidQuantity");
-				return;
+				throw new IllegalArgumentException("Số lượng phải lớn hơn 0.");
 			}
 
-			// Gọi hàm service để cập nhật sản phẩm trong giỏ hàng
 			Cart updatedCart = cartService.addOrUpdateCartItem(currentUser.get_id(), productId, newCount);
-
-			if (updatedCart != null) {
-				// Nếu cập nhật thành công, chuyển hướng đến trang xem giỏ hàng
-				resp.sendRedirect(req.getContextPath() + "/cart/view");
-			} else {
-				// Nếu không tìm thấy cart hoặc sản phẩm, trả về lỗi
-				resp.sendRedirect(req.getContextPath() + "/error?message=CartUpdateFailed");
-			}
+			req.getSession().setAttribute("cart", updatedCart);
+			resp.sendRedirect(req.getContextPath() + "/cart/view");
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			resp.sendRedirect(req.getContextPath() + "/error?message=InvalidInput");
+		} catch (IllegalArgumentException e) {
+			resp.sendRedirect(req.getContextPath() + "/error?message=" + e.getMessage());
 		}
 	}
+
+	private void removeFromCart(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		User currentUser = (User) req.getSession().getAttribute("account");
+
+		if (currentUser == null) {
+			resp.sendRedirect(req.getContextPath() + "/login");
+			return;
+		}
+
+		try {
+			int productId = Integer.parseInt(req.getParameter("productId"));
+
+			cartService.removeCartItem(currentUser.get_id(), productId);
+			Cart updatedCart = cartService.getCartByUser(currentUser);
+			req.getSession().setAttribute("cart", updatedCart);
+			resp.sendRedirect(req.getContextPath() + "/cart/view");
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			resp.sendRedirect(req.getContextPath() + "/error?message=InvalidInput");
+		} catch (IllegalArgumentException e) {
+			resp.sendRedirect(req.getContextPath() + "/error?message=" + e.getMessage());
+		}
+	}
+
 
 }

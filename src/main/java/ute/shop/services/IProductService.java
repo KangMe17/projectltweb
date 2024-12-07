@@ -10,4 +10,6 @@ public interface IProductService {
 	// Kiểm tra xem sản phẩm có đủ tồn kho không
 	boolean isStockAvailable(int productId, int count);
 
+	Product findById(int productId);
+
 }

@@ -88,7 +88,7 @@ public class Store {
 	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
 	private List<Cart> carts = new ArrayList<>();
 
-	@OneToMany(mappedBy = "store")
+	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Review> reviews = new ArrayList<>();
 
 	@OneToOne
