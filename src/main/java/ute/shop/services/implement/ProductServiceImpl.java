@@ -1,5 +1,8 @@
 package ute.shop.services.implement;
 
+
+import java.util.List;
+
 import ute.shop.dao.IProductDao;
 import ute.shop.dao.implement.ProductDaoImpl;
 import ute.shop.entity.Product;
@@ -28,5 +31,10 @@ public class ProductServiceImpl implements IProductService {
 	@Override
 	public Product findById(int productId) {
 		return findProductById(productId);
+	}
+	
+	@Override
+	public List<Product> findAll() {
+		return productDao.findAll();
 	}
 }

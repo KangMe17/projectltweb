@@ -1,5 +1,7 @@
 package ute.shop.services.implement;
 
+import java.util.List;
+
 import ute.shop.dao.IStoreDao;
 import ute.shop.dao.implement.StoreDaoImpl;
 import ute.shop.entity.Store;
@@ -27,4 +29,8 @@ public class StoreServiceImpl implements IStoreService {
 		}
 	}
 
+		@Override
+		public List<Store> findAll() {
+			return storeDao.findAll();
+		}
 }
