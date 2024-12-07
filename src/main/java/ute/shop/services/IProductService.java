@@ -1,12 +1,10 @@
-package ute.shop.dao;
+package ute.shop.services;
 
 import java.util.List;
 
 import ute.shop.entity.Product;
 
-public interface IProductDao {
+public interface IProductService {
 
-	
-	//@dmhisdmh admin
 	List<Product> findAll();
 }

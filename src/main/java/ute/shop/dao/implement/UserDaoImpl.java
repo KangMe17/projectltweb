@@ -1,7 +1,6 @@
 package ute.shop.dao.implement;
 
 import java.util.List;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
@@ -105,4 +104,8 @@ public class UserDaoImpl implements IUserDao {
             em.close();
         }
     }
+    
+    
+    
+    
 }
