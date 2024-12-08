@@ -22,4 +22,7 @@ public interface IUserService {
 
 	// Find a user by their ID
 	User findById(int userId);
+	
+	//find top user
+	List<Object[]> findTopUser();
 }

@@ -1,1361 +1,387 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<!-- BEGIN PAGE CONTAINER -->
-	<div class="page-container">
-		<!-- BEGIN PAGE HEAD -->
-		<div class="page-head">
-			<div class="container">
-				<!-- BEGIN PAGE TITLE -->
-				<div class="page-title">
-					<h1>
-						Dashboard <small>statistics & reports</small>
-					</h1>
-				</div>
-				<!-- END PAGE TITLE -->
-				<!-- BEGIN PAGE TOOLBAR -->
-				<div class="page-toolbar">
-					<!-- BEGIN THEME PANEL -->
-					<div class="btn-group btn-theme-panel">
-						<a href="javascript:;" class="btn dropdown-toggle"
-							data-toggle="dropdown"> <i class="icon-settings"></i>
-						</a>
-						<div
-							class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
-							<div class="row">
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<h3>THEME COLORS</h3>
-									<div class="row">
-										<div class="col-md-6 col-sm-6 col-xs-12">
-											<ul class="theme-colors">
-												<li class="theme-color theme-color-default"
-													data-theme="default"><span class="theme-color-view"></span>
-													<span class="theme-color-name">Default</span></li>
-												<li class="theme-color theme-color-blue-hoki"
-													data-theme="blue-hoki"><span class="theme-color-view"></span>
-													<span class="theme-color-name">Blue Hoki</span></li>
-												<li class="theme-color theme-color-blue-steel"
-													data-theme="blue-steel"><span class="theme-color-view"></span>
-													<span class="theme-color-name">Blue Steel</span></li>
-												<li class="theme-color theme-color-yellow-orange"
-													data-theme="yellow-orange"><span
-													class="theme-color-view"></span> <span
-													class="theme-color-name">Orange</span></li>
-												<li class="theme-color theme-color-yellow-crusta"
-													data-theme="yellow-crusta"><span
-													class="theme-color-view"></span> <span
-													class="theme-color-name">Yellow Crusta</span></li>
-											</ul>
-										</div>
-										<div class="col-md-6 col-sm-6 col-xs-12">
-											<ul class="theme-colors">
-												<li class="theme-color theme-color-green-haze"
-													data-theme="green-haze"><span class="theme-color-view"></span>
-													<span class="theme-color-name">Green Haze</span></li>
-												<li class="theme-color theme-color-red-sunglo"
-													data-theme="red-sunglo"><span class="theme-color-view"></span>
-													<span class="theme-color-name">Red Sunglo</span></li>
-												<li class="theme-color theme-color-red-intense"
-													data-theme="red-intense"><span
-													class="theme-color-view"></span> <span
-													class="theme-color-name">Red Intense</span></li>
-												<li class="theme-color theme-color-purple-plum"
-													data-theme="purple-plum"><span
-													class="theme-color-view"></span> <span
-													class="theme-color-name">Purple Plum</span></li>
-												<li class="theme-color theme-color-purple-studio"
-													data-theme="purple-studio"><span
-													class="theme-color-view"></span> <span
-													class="theme-color-name">Purple Studio</span></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 col-sm-6 col-xs-12 seperator">
-									<h3>LAYOUT</h3>
-									<ul class="theme-settings">
-										<li>Theme Style <select
-											class="theme-setting theme-setting-style form-control input-sm input-small input-inline tooltips"
-											data-original-title="Change theme style"
-											data-container="body" data-placement="left">
-												<option value="boxed" selected="selected">Square
-													corners</option>
-												<option value="rounded">Rounded corners</option>
-										</select>
-										</li>
-										<li>Layout <select
-											class="theme-setting theme-setting-layout form-control input-sm input-small input-inline tooltips"
-											data-original-title="Change layout type"
-											data-container="body" data-placement="left">
-												<option value="boxed" selected="selected">Boxed</option>
-												<option value="fluid">Fluid</option>
-										</select>
-										</li>
-										<li>Top Menu Style <select
-											class="theme-setting theme-setting-top-menu-style form-control input-sm input-small input-inline tooltips"
-											data-original-title="Change top menu dropdowns style"
-											data-container="body" data-placement="left">
-												<option value="dark" selected="selected">Dark</option>
-												<option value="light">Light</option>
-										</select>
-										</li>
-										<li>Top Menu Mode <select
-											class="theme-setting theme-setting-top-menu-mode form-control input-sm input-small input-inline tooltips"
-											data-original-title="Enable fixed(sticky) top menu"
-											data-container="body" data-placement="left">
-												<option value="fixed">Fixed</option>
-												<option value="not-fixed" selected="selected">Not
-													Fixed</option>
-										</select>
-										</li>
-										<li>Mega Menu Style <select
-											class="theme-setting theme-setting-mega-menu-style form-control input-sm input-small input-inline tooltips"
-											data-original-title="Change mega menu dropdowns style"
-											data-container="body" data-placement="left">
-												<option value="dark" selected="selected">Dark</option>
-												<option value="light">Light</option>
-										</select>
-										</li>
-										<li>Mega Menu Mode <select
-											class="theme-setting theme-setting-mega-menu-mode form-control input-sm input-small input-inline tooltips"
-											data-original-title="Enable fixed(sticky) mega menu"
-											data-container="body" data-placement="left">
-												<option value="fixed" selected="selected">Fixed</option>
-												<option value="not-fixed">Not Fixed</option>
-										</select>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- END THEME PANEL -->
-				</div>
-				<!-- END PAGE TOOLBAR -->
-			</div>
-		</div>
-		<!-- END PAGE HEAD -->
-		<!-- BEGIN PAGE CONTENT -->
-		<div class="page-content">
-			<div class="container">
-				<!-- BEGIN PAGE BREADCRUMB -->
-				<ul class="page-breadcrumb breadcrumb hide">
-					<li><a href="#">Home</a><i class="fa fa-circle"></i></li>
-					<li class="active">Dashboard</li>
-				</ul>
-				<!-- END PAGE BREADCRUMB -->
-				<!-- BEGIN PAGE CONTENT INNER -->
-				<div class="row margin-top-10">
-					<div class="col-md-6 col-sm-12">
-						<!-- BEGIN PORTLET-->
-						<div class="portlet light ">
-							<div class="portlet-title">
-								<div class="caption caption-md">
-									<i class="icon-bar-chart theme-font hide"></i> <span
-										class="caption-subject theme-font bold uppercase">Sales
-										Summary</span> <span class="caption-helper hide">weekly
-										stats...</span>
-								</div>
-								<div class="actions">
-									<div class="btn-group btn-group-devided" data-toggle="buttons">
-										<label
-											class="btn btn-transparent grey-salsa btn-circle btn-sm active">
-											<input type="radio" name="options" class="toggle"
-											id="option1">Today
-										</label> <label
-											class="btn btn-transparent grey-salsa btn-circle btn-sm">
-											<input type="radio" name="options" class="toggle"
-											id="option2">Week
-										</label> <label
-											class="btn btn-transparent grey-salsa btn-circle btn-sm">
-											<input type="radio" name="options" class="toggle"
-											id="option2">Month
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="portlet-body">
-								<div class="row list-separated">
-									<div class="col-md-3 col-sm-3 col-xs-6">
-										<div class="font-grey-mint font-sm">Total Sales</div>
-										<div class="uppercase font-hg font-red-flamingo">
-											13,760 <span class="font-lg font-grey-mint">$</span>
-										</div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-6">
-										<div class="font-grey-mint font-sm">Revenue</div>
-										<div class="uppercase font-hg theme-font">
-											4,760 <span class="font-lg font-grey-mint">$</span>
-										</div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-6">
-										<div class="font-grey-mint font-sm">Expenses</div>
-										<div class="uppercase font-hg font-purple">
-											11,760 <span class="font-lg font-grey-mint">$</span>
-										</div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-6">
-										<div class="font-grey-mint font-sm">Growth</div>
-										<div class="uppercase font-hg font-blue-sharp">
-											9,760 <span class="font-lg font-grey-mint">$</span>
-										</div>
-									</div>
-								</div>
-								<ul class="list-separated list-inline-xs hide">
-									<li>
-										<div class="font-grey-mint font-sm">Total Sales</div>
-										<div class="uppercase font-hg font-red-flamingo">
-											13,760 <span class="font-lg font-grey-mint">$</span>
-										</div>
-									</li>
-									<li></li>
-									<li class="border">
-										<div class="font-grey-mint font-sm">Revenue</div>
-										<div class="uppercase font-hg theme-font">
-											4,760 <span class="font-lg font-grey-mint">$</span>
-										</div>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<div class="font-grey-mint font-sm">Expenses</div>
-										<div class="uppercase font-hg font-purple">
-											11,760 <span class="font-lg font-grey-mint">$</span>
-										</div>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<div class="font-grey-mint font-sm">Growth</div>
-										<div class="uppercase font-hg font-blue-sharp">
-											9,760 <span class="font-lg font-grey-mint">$</span>
-										</div>
-									</li>
-								</ul>
-								<div id="sales_statistics"
-									class="portlet-body-morris-fit morris-chart"
-									style="height: 260px"></div>
-							</div>
-						</div>
-						<!-- END PORTLET-->
-					</div>
-					<div class="col-md-6 col-sm-12">
-						<!-- BEGIN PORTLET-->
-						<div class="portlet light ">
-							<div class="portlet-title">
-								<div class="caption caption-md">
-									<i class="icon-bar-chart theme-font hide"></i> <span
-										class="caption-subject theme-font bold uppercase">Member
-										Activity</span> <span class="caption-helper hide">weekly
-										stats...</span>
-								</div>
-								<div class="actions">
-									<div class="btn-group btn-group-devided" data-toggle="buttons">
-										<label
-											class="btn btn-transparent grey-salsa btn-circle btn-sm active">
-											<input type="radio" name="options" class="toggle"
-											id="option1">Today
-										</label> <label
-											class="btn btn-transparent grey-salsa btn-circle btn-sm">
-											<input type="radio" name="options" class="toggle"
-											id="option2">Week
-										</label> <label
-											class="btn btn-transparent grey-salsa btn-circle btn-sm">
-											<input type="radio" name="options" class="toggle"
-											id="option2">Month
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="portlet-body">
-								<div class="row number-stats margin-bottom-30">
-									<div class="col-md-6 col-sm-6 col-xs-6">
-										<div class="stat-left">
-											<div class="stat-chart">
-												<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
-												<div id="sparkline_bar"></div>
-											</div>
-											<div class="stat-number">
-												<div class="title">Total</div>
-												<div class="number">2460</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6 col-sm-6 col-xs-6">
-										<div class="stat-right">
-											<div class="stat-chart">
-												<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
-												<div id="sparkline_bar2"></div>
-											</div>
-											<div class="stat-number">
-												<div class="title">New</div>
-												<div class="number">719</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="table-scrollable table-scrollable-borderless">
-									<table class="table table-hover table-light">
-										<thead>
-											<tr class="uppercase">
-												<th colspan="2">MEMBER</th>
-												<th>Earnings</th>
-												<th>CASES</th>
-												<th>CLOSED</th>
-												<th>RATE</th>
-											</tr>
-										</thead>
-										<tr>
-											<td class="fit"><img class="user-pic"
-												src="${URL}assets/admin/layout3/img/avatar4.jpg"></td>
-											<td><a href="javascript:;" class="primary-link">Brain</a>
-											</td>
-											<td>$345</td>
-											<td>45</td>
-											<td>124</td>
-											<td><span class="bold theme-font">80%</span></td>
-										</tr>
-										<tr>
-											<td class="fit"><img class="user-pic"
-												src="${URL}assets/admin/layout3/img/avatar5.jpg"></td>
-											<td><a href="javascript:;" class="primary-link">Nick</a>
-											</td>
-											<td>$560</td>
-											<td>12</td>
-											<td>24</td>
-											<td><span class="bold theme-font">67%</span></td>
-										</tr>
-										<tr>
-											<td class="fit"><img class="user-pic"
-												src="${URL}assets/admin/layout3/img/avatar6.jpg"></td>
-											<td><a href="javascript:;" class="primary-link">Tim</a>
-											</td>
-											<td>$1,345</td>
-											<td>450</td>
-											<td>46</td>
-											<td><span class="bold theme-font">98%</span></td>
-										</tr>
-										<tr>
-											<td class="fit"><img class="user-pic"
-												src="${URL}assets/admin/layout3/img/avatar7.jpg"></td>
-											<td><a href="javascript:;" class="primary-link">Tom</a>
-											</td>
-											<td>$645</td>
-											<td>50</td>
-											<td>89</td>
-											<td><span class="bold theme-font">58%</span></td>
-										</tr>
-									</table>
-								</div>
-							</div>
-						</div>
-						<!-- END PORTLET-->
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-sm-12">
-						<!-- BEGIN PORTLET-->
-						<div class="portlet light tasks-widget">
-							<div class="portlet-title">
-								<div class="caption caption-md">
-									<i class="icon-bar-chart theme-font hide"></i> <span
-										class="caption-subject theme-font bold uppercase">TASKS</span>
-									<span class="caption-helper">16 pending</span>
-								</div>
-								<div class="inputs">
-									<div class="portlet-input input-small input-inline">
-										<div class="input-icon right">
-											<i class="icon-magnifier"></i> <input type="text"
-												class="form-control form-control-solid"
-												placeholder="search...">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="portlet-body">
-								<div class="task-content">
-									<div class="scroller" style="height: 282px;"
-										data-always-visible="1" data-rail-visible1="0"
-										data-handle-color="#D7DCE2">
-										<!-- START TASK LIST -->
-										<ul class="task-list">
-											<li>
-												<div class="task-checkbox">
-													<input type="hidden" value="1" name="test" /> <input
-														type="checkbox" class="liChild" value="2" name="test" />
-												</div>
-												<div class="task-title">
-													<span class="task-title-sp"> Present 2013 Year IPO
-														Statistics at Board Meeting </span> <span
-														class="label label-sm label-success">Company</span> <span
-														class="task-bell"> <i class="fa fa-bell-o"></i>
-													</span>
-												</div>
-												<div class="task-config">
-													<div class="task-config-btn btn-group">
-														<a class="btn btn-xs default" href="javascript:;"
-															data-toggle="dropdown" data-hover="dropdown"
-															data-close-others="true"> <i class="fa fa-cog"></i><i
-															class="fa fa-angle-down"></i>
-														</a>
-														<ul class="dropdown-menu pull-right">
-															<li><a href="javascript:;"> <i
-																	class="fa fa-check"></i> Complete
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-pencil"></i> Edit
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-trash-o"></i> Cancel
-															</a></li>
-														</ul>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="task-checkbox">
-													<input type="checkbox" class="liChild" value="" />
-												</div>
-												<div class="task-title">
-													<span class="task-title-sp"> Hold An Interview for
-														Marketing Manager Position </span> <span
-														class="label label-sm label-danger">Marketing</span>
-												</div>
-												<div class="task-config">
-													<div class="task-config-btn btn-group">
-														<a class="btn btn-xs default" href="javascript:;"
-															data-toggle="dropdown" data-hover="dropdown"
-															data-close-others="true"> <i class="fa fa-cog"></i><i
-															class="fa fa-angle-down"></i>
-														</a>
-														<ul class="dropdown-menu pull-right">
-															<li><a href="javascript:;"> <i
-																	class="fa fa-check"></i> Complete
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-pencil"></i> Edit
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-trash-o"></i> Cancel
-															</a></li>
-														</ul>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="task-checkbox">
-													<input type="checkbox" class="liChild" value="" />
-												</div>
-												<div class="task-title">
-													<span class="task-title-sp"> AirAsia Intranet System
-														Project Internal Meeting </span> <span
-														class="label label-sm label-success">AirAsia</span> <span
-														class="task-bell"> <i class="fa fa-bell-o"></i>
-													</span>
-												</div>
-												<div class="task-config">
-													<div class="task-config-btn btn-group">
-														<a class="btn btn-xs default" href="javascript:;"
-															data-toggle="dropdown" data-hover="dropdown"
-															data-close-others="true"> <i class="fa fa-cog"></i><i
-															class="fa fa-angle-down"></i>
-														</a>
-														<ul class="dropdown-menu pull-right">
-															<li><a href="javascript:;"> <i
-																	class="fa fa-check"></i> Complete
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-pencil"></i> Edit
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-trash-o"></i> Cancel
-															</a></li>
-														</ul>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="task-checkbox">
-													<input type="checkbox" class="liChild" value="" />
-												</div>
-												<div class="task-title">
-													<span class="task-title-sp"> Technical Management
-														Meeting </span> <span class="label label-sm label-warning">Company</span>
-												</div>
-												<div class="task-config">
-													<div class="task-config-btn btn-group">
-														<a class="btn btn-xs default" href="javascript:;"
-															data-toggle="dropdown" data-hover="dropdown"
-															data-close-others="true"> <i class="fa fa-cog"></i><i
-															class="fa fa-angle-down"></i>
-														</a>
-														<ul class="dropdown-menu pull-right">
-															<li><a href="javascript:;"> <i
-																	class="fa fa-check"></i> Complete
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-pencil"></i> Edit
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-trash-o"></i> Cancel
-															</a></li>
-														</ul>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="task-checkbox">
-													<input type="checkbox" class="liChild" value="" />
-												</div>
-												<div class="task-title">
-													<span class="task-title-sp"> Kick-off Company CRM
-														Mobile App Development </span> <span
-														class="label label-sm label-info">Internal Products</span>
-												</div>
-												<div class="task-config">
-													<div class="task-config-btn btn-group">
-														<a class="btn btn-xs default" href="javascript:;"
-															data-toggle="dropdown" data-hover="dropdown"
-															data-close-others="true"> <i class="fa fa-cog"></i><i
-															class="fa fa-angle-down"></i>
-														</a>
-														<ul class="dropdown-menu pull-right">
-															<li><a href="javascript:;"> <i
-																	class="fa fa-check"></i> Complete
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-pencil"></i> Edit
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-trash-o"></i> Cancel
-															</a></li>
-														</ul>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="task-checkbox">
-													<input type="checkbox" class="liChild" value="" />
-												</div>
-												<div class="task-title">
-													<span class="task-title-sp"> Prepare Commercial
-														Offer For SmartVision Website Rewamp </span> <span
-														class="label label-sm label-danger">SmartVision</span>
-												</div>
-												<div class="task-config">
-													<div class="task-config-btn btn-group">
-														<a class="btn btn-xs default" href="javascript:;"
-															data-toggle="dropdown" data-hover="dropdown"
-															data-close-others="true"> <i class="fa fa-cog"></i><i
-															class="fa fa-angle-down"></i>
-														</a>
-														<ul class="dropdown-menu pull-right">
-															<li><a href="javascript:;"> <i
-																	class="fa fa-check"></i> Complete
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-pencil"></i> Edit
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-trash-o"></i> Cancel
-															</a></li>
-														</ul>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="task-checkbox">
-													<input type="checkbox" class="liChild" value="" />
-												</div>
-												<div class="task-title">
-													<span class="task-title-sp"> Sign-Off The Comercial
-														Agreement With AutoSmart </span> <span
-														class="label label-sm label-default">AutoSmart</span> <span
-														class="task-bell"> <i class="fa fa-bell-o"></i>
-													</span>
-												</div>
-												<div class="task-config">
-													<div class="task-config-btn btn-group">
-														<a class="btn btn-xs default" href="javascript:;"
-															data-toggle="dropdown" data-hover="dropdown"
-															data-close-others="true"> <i class="fa fa-cog"></i><i
-															class="fa fa-angle-down"></i>
-														</a>
-														<ul class="dropdown-menu pull-right">
-															<li><a href="javascript:;"> <i
-																	class="fa fa-check"></i> Complete
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-pencil"></i> Edit
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-trash-o"></i> Cancel
-															</a></li>
-														</ul>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="task-checkbox">
-													<input type="checkbox" class="liChild" value="" />
-												</div>
-												<div class="task-title">
-													<span class="task-title-sp"> Company Staff Meeting </span>
-													<span class="label label-sm label-success">Cruise</span> <span
-														class="task-bell"> <i class="fa fa-bell-o"></i>
-													</span>
-												</div>
-												<div class="task-config">
-													<div class="task-config-btn btn-group">
-														<a class="btn btn-xs default" href="javascript:;"
-															data-toggle="dropdown" data-hover="dropdown"
-															data-close-others="true"> <i class="fa fa-cog"></i><i
-															class="fa fa-angle-down"></i>
-														</a>
-														<ul class="dropdown-menu pull-right">
-															<li><a href="javascript:;"> <i
-																	class="fa fa-check"></i> Complete
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-pencil"></i> Edit
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-trash-o"></i> Cancel
-															</a></li>
-														</ul>
-													</div>
-												</div>
-											</li>
-											<li class="last-line">
-												<div class="task-checkbox">
-													<input type="checkbox" class="liChild" value="" />
-												</div>
-												<div class="task-title">
-													<span class="task-title-sp"> KeenThemes Investment
-														Discussion </span> <span class="label label-sm label-warning">KeenThemes
-													</span>
-												</div>
-												<div class="task-config">
-													<div class="task-config-btn btn-group">
-														<a class="btn btn-xs default" href="javascript:;"
-															data-toggle="dropdown" data-hover="dropdown"
-															data-close-others="true"> <i class="fa fa-cog"></i><i
-															class="fa fa-angle-down"></i>
-														</a>
-														<ul class="dropdown-menu pull-right">
-															<li><a href="javascript:;"> <i
-																	class="fa fa-check"></i> Complete
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-pencil"></i> Edit
-															</a></li>
-															<li><a href="javascript:;"> <i
-																	class="fa fa-trash-o"></i> Cancel
-															</a></li>
-														</ul>
-													</div>
-												</div>
-											</li>
-										</ul>
-										<!-- END START TASK LIST -->
-									</div>
-								</div>
-								<div class="task-footer">
-									<div class="btn-arrow-link pull-right">
-										<a href="javascript:;">See All Tasks</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- END PORTLET-->
-					</div>
-					<div class="col-md-6 col-sm-12">
-						<!-- BEGIN PORTLET-->
-						<div class="portlet light">
-							<div class="portlet-title">
-								<div class="caption caption-md">
-									<i class="icon-bar-chart theme-font hide"></i> <span
-										class="caption-subject theme-font bold uppercase">Customer
-										Support</span> <span class="caption-helper">45 pending</span>
-								</div>
-								<div class="inputs">
-									<div class="portlet-input input-inline input-small ">
-										<div class="input-icon right">
-											<i class="icon-magnifier"></i> <input type="text"
-												class="form-control form-control-solid"
-												placeholder="search...">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="portlet-body">
-								<div class="scroller" style="height: 305px;"
-									data-always-visible="1" data-rail-visible1="0"
-									data-handle-color="#D7DCE2">
-									<div class="general-item-list">
-										<div class="item">
-											<div class="item-head">
-												<div class="item-details">
-													<img class="item-pic"
-														src="${URL}assets/admin/layout3/img/avatar4.jpg"> <a
-														href="" class="item-name primary-link">Nick Larson</a> <span
-														class="item-label">3 hrs ago</span>
-												</div>
-												<span class="item-status"><span
-													class="badge badge-empty badge-success"></span> Open</span>
-											</div>
-											<div class="item-body">Lorem ipsum dolor sit amet,
-												consectetuer adipiscing elit, sed diam nonummy nibh euismod
-												tincidunt ut laoreet dolore magna aliquam erat volutpat.</div>
-										</div>
-										<div class="item">
-											<div class="item-head">
-												<div class="item-details">
-													<img class="item-pic"
-														src="${URL}assets/admin/layout3/img/avatar3.jpg"> <a
-														href="" class="item-name primary-link">Mark</a> <span
-														class="item-label">5 hrs ago</span>
-												</div>
-												<span class="item-status"><span
-													class="badge badge-empty badge-warning"></span> Pending</span>
-											</div>
-											<div class="item-body">Lorem ipsum dolor sit amet,
-												consectetuer adipiscing elit, sed diam nonummy nibh euismod
-												tincidunt ut laoreet dolore magna aliquam erat volutpat
-												tincidunt ut laoreet.</div>
-										</div>
-										<div class="item">
-											<div class="item-head">
-												<div class="item-details">
-													<img class="item-pic"
-														src="${URL}assets/admin/layout3/img/avatar6.jpg"> <a
-														href="" class="item-name primary-link">Nick Larson</a> <span
-														class="item-label">8 hrs ago</span>
-												</div>
-												<span class="item-status"><span
-													class="badge badge-empty badge-primary"></span> Closed</span>
-											</div>
-											<div class="item-body">Lorem ipsum dolor sit amet,
-												consectetuer adipiscing elit, sed diam nonummy nibh.</div>
-										</div>
-										<div class="item">
-											<div class="item-head">
-												<div class="item-details">
-													<img class="item-pic"
-														src="${URL}assets/admin/layout3/img/avatar7.jpg"> <a
-														href="" class="item-name primary-link">Nick Larson</a> <span
-														class="item-label">12 hrs ago</span>
-												</div>
-												<span class="item-status"><span
-													class="badge badge-empty badge-danger"></span> Pending</span>
-											</div>
-											<div class="item-body">Consectetuer adipiscing elit
-												Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-												sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-												magna aliquam erat volutpat.</div>
-										</div>
-										<div class="item">
-											<div class="item-head">
-												<div class="item-details">
-													<img class="item-pic"
-														src="${URL}assets/admin/layout3/img/avatar9.jpg"> <a
-														href="" class="item-name primary-link">Richard Stone</a> <span
-														class="item-label">2 days ago</span>
-												</div>
-												<span class="item-status"><span
-													class="badge badge-empty badge-danger"></span> Open</span>
-											</div>
-											<div class="item-body">Lorem ipsum dolor sit amet,
-												consectetuer adipiscing elit, ut laoreet dolore magna
-												aliquam erat volutpat.</div>
-										</div>
-										<div class="item">
-											<div class="item-head">
-												<div class="item-details">
-													<img class="item-pic"
-														src="${URL}assets/admin/layout3/img/avatar8.jpg"> <a
-														href="" class="item-name primary-link">Dan</a> <span
-														class="item-label">3 days ago</span>
-												</div>
-												<span class="item-status"><span
-													class="badge badge-empty badge-warning"></span> Pending</span>
-											</div>
-											<div class="item-body">Lorem ipsum dolor sit amet, sed
-												diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-												aliquam erat volutpat.</div>
-										</div>
-										<div class="item">
-											<div class="item-head">
-												<div class="item-details">
-													<img class="item-pic"
-														src="${URL}assets/admin/layout3/img/avatar2.jpg"> <a
-														href="" class="item-name primary-link">Larry</a> <span
-														class="item-label">4 hrs ago</span>
-												</div>
-												<span class="item-status"><span
-													class="badge badge-empty badge-success"></span> Open</span>
-											</div>
-											<div class="item-body">Lorem ipsum dolor sit amet,
-												consectetuer adipiscing elit, sed diam nonummy nibh euismod
-												tincidunt ut laoreet dolore magna aliquam erat volutpat.</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- END PORTLET-->
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-sm-6">
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@taglib prefix="fmt" uri="jakarta.tags.fmt"%>
 
+<div id="page-home"></div>
+<!-- BEGIN PAGE CONTAINER -->
+<div class="page-container">
+	<!-- BEGIN PAGE HEAD -->
+	<div class="page-head">
+		<div class="container">
+			<!-- BEGIN PAGE TITLE -->
+			<div class="page-title">
+				<h1>
+					eCommerce <small>dashboard & statistics</small>
+				</h1>
+			</div>
+			<!-- END PAGE TITLE -->
+
+		</div>
+	</div>
+	<!-- END PAGE HEAD -->
+	<!-- BEGIN PAGE CONTENT -->
+	<div class="page-content">
+		<div class="container">
+			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<div class="modal fade" id="portlet-config" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true"></button>
+							<h4 class="modal-title">Modal title</h4>
+						</div>
+						<div class="modal-body">Widget settings form goes here</div>
+						<div class="modal-footer">
+							<button type="button" class="btn blue">Save changes</button>
+							<button type="button" class="btn default" data-dismiss="modal">Close</button>
+						</div>
 					</div>
-					<div class="col-md-6 col-sm-6">
-						<!-- BEGIN PORTLET-->
-						<div class="portlet light">
-							<div class="portlet-title tabbable-line">
-								<div class="caption caption-md">
-									<i class="icon-globe theme-font hide"></i> <span
-										class="caption-subject theme-font bold uppercase">Feeds</span>
-								</div>
-								<ul class="nav nav-tabs">
-									<li class="active"><a href="#tab_1_1" data-toggle="tab">
-											System </a></li>
-									<li><a href="#tab_1_2" data-toggle="tab"> Activities </a>
-									</li>
-								</ul>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+
+
+			<!-- 3 ô thông báo ở đầu -->
+			<!-- BEGIN PAGE CONTENT INNER -->
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
+					<a class="dashboard-stat dashboard-stat-light blue-madison"
+						href="javascript:;">
+						<div class="visual">
+							<i class="fa fa-briefcase fa-icon-medium"></i>
+						</div>
+						<div class="details">
+							<div class="number">$${totalSale}</div>
+							<div class="desc">Lifetime Sales</div>
+						</div>
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<a class="dashboard-stat dashboard-stat-light red-intense"
+						href="javascript:;">
+						<div class="visual">
+							<i class="fa fa-shopping-cart"></i>
+						</div>
+						<div class="details">
+							<div class="number">$${totalOrder}</div>
+							<div class="desc">Total Orders</div>
+						</div>
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<a class="dashboard-stat dashboard-stat-light green-haze"
+						href="javascript:;">
+						<div class="visual">
+							<i class="fa fa-group fa-icon-medium"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								$
+								<fmt:formatNumber value="${totalSale/totalOrder}" type="number"
+									maxFractionDigits="2" />
 							</div>
-							<div class="portlet-body">
-								<!--BEGIN TABS-->
-								<div class="tab-content">
-									<div class="tab-pane active" id="tab_1_1">
-										<div class="scroller" style="height: 337px;"
-											data-always-visible="1" data-rail-visible1="0"
-											data-handle-color="#D7DCE2">
-											<ul class="feeds">
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-success">
-																	<i class="fa fa-bell-o"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">
-																	You have 4 pending tasks. <span
-																		class="label label-sm label-info"> Take action
-																		<i class="fa fa-share"></i>
-																	</span>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">Just now</div>
-													</div>
-												</li>
-												<li><a href="javascript:;">
-														<div class="col1">
-															<div class="cont">
-																<div class="cont-col1">
-																	<div class="label label-sm label-success">
-																		<i class="fa fa-bell-o"></i>
-																	</div>
-																</div>
-																<div class="cont-col2">
-																	<div class="desc">New version v1.4 just lunched!
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div class="col2">
-															<div class="date">20 mins</div>
-														</div>
-												</a></li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-danger">
-																	<i class="fa fa-bolt"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">Database server #12 overloaded.
-																	Please fix the issue.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">24 mins</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-info">
-																	<i class="fa fa-bullhorn"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">New order received and pending
-																	for process.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">30 mins</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-success">
-																	<i class="fa fa-bullhorn"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">New payment refund and pending
-																	approval.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">40 mins</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-warning">
-																	<i class="fa fa-plus"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">New member registered. Pending
-																	approval.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">1.5 hours</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-success">
-																	<i class="fa fa-bell-o"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">
-																	Web server hardware needs to be upgraded. <span
-																		class="label label-sm label-default "> Overdue
-																	</span>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">2 hours</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-default">
-																	<i class="fa fa-bullhorn"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">Prod01 database server is
-																	overloaded 90%.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">3 hours</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-warning">
-																	<i class="fa fa-bullhorn"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">New group created. Pending
-																	manager review.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">5 hours</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-info">
-																	<i class="fa fa-bullhorn"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">Order payment failed.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">18 hours</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-default">
-																	<i class="fa fa-bullhorn"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">New application received.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">21 hours</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-info">
-																	<i class="fa fa-bullhorn"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">Dev90 web server restarted.
-																	Pending overall system check.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">22 hours</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-default">
-																	<i class="fa fa-bullhorn"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">New member registered. Pending
-																	approval</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">21 hours</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-info">
-																	<i class="fa fa-bullhorn"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">L45 Network failure. Schedule
-																	maintenance.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">22 hours</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-default">
-																	<i class="fa fa-bullhorn"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">Order canceled with failed
-																	payment.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">21 hours</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-info">
-																	<i class="fa fa-bullhorn"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">Web-A2 clound instance created.
-																	Schedule full scan.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">22 hours</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-default">
-																	<i class="fa fa-bullhorn"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">Member canceled. Schedule
-																	account review.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">21 hours</div>
-													</div>
-												</li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-info">
-																	<i class="fa fa-bullhorn"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">New order received. Please take
-																	care of it.</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">22 hours</div>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<div class="tab-pane" id="tab_1_2">
-										<div class="scroller" style="height: 337px;"
-											data-always-visible="1" data-rail-visible1="0"
-											data-handle-color="#D7DCE2">
-											<ul class="feeds">
-												<li><a href="javascript:;">
-														<div class="col1">
-															<div class="cont">
-																<div class="cont-col1">
-																	<div class="label label-sm label-success">
-																		<i class="fa fa-bell-o"></i>
-																	</div>
-																</div>
-																<div class="cont-col2">
-																	<div class="desc">New user registered</div>
-																</div>
-															</div>
-														</div>
-														<div class="col2">
-															<div class="date">Just now</div>
-														</div>
-												</a></li>
-												<li><a href="javascript:;">
-														<div class="col1">
-															<div class="cont">
-																<div class="cont-col1">
-																	<div class="label label-sm label-success">
-																		<i class="fa fa-bell-o"></i>
-																	</div>
-																</div>
-																<div class="cont-col2">
-																	<div class="desc">New order received</div>
-																</div>
-															</div>
-														</div>
-														<div class="col2">
-															<div class="date">10 mins</div>
-														</div>
-												</a></li>
-												<li>
-													<div class="col1">
-														<div class="cont">
-															<div class="cont-col1">
-																<div class="label label-sm label-danger">
-																	<i class="fa fa-bolt"></i>
-																</div>
-															</div>
-															<div class="cont-col2">
-																<div class="desc">
-																	Order #24DOP4 has been rejected. <span
-																		class="label label-sm label-danger "> Take
-																		action <i class="fa fa-share"></i>
-																	</span>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="col2">
-														<div class="date">24 mins</div>
-													</div>
-												</li>
-												<li><a href="javascript:;">
-														<div class="col1">
-															<div class="cont">
-																<div class="cont-col1">
-																	<div class="label label-sm label-success">
-																		<i class="fa fa-bell-o"></i>
-																	</div>
-																</div>
-																<div class="cont-col2">
-																	<div class="desc">New user registered</div>
-																</div>
-															</div>
-														</div>
-														<div class="col2">
-															<div class="date">Just now</div>
-														</div>
-												</a></li>
-												<li><a href="javascript:;">
-														<div class="col1">
-															<div class="cont">
-																<div class="cont-col1">
-																	<div class="label label-sm label-success">
-																		<i class="fa fa-bell-o"></i>
-																	</div>
-																</div>
-																<div class="cont-col2">
-																	<div class="desc">New user registered</div>
-																</div>
-															</div>
-														</div>
-														<div class="col2">
-															<div class="date">Just now</div>
-														</div>
-												</a></li>
-												<li><a href="javascript:;">
-														<div class="col1">
-															<div class="cont">
-																<div class="cont-col1">
-																	<div class="label label-sm label-success">
-																		<i class="fa fa-bell-o"></i>
-																	</div>
-																</div>
-																<div class="cont-col2">
-																	<div class="desc">New user registered</div>
-																</div>
-															</div>
-														</div>
-														<div class="col2">
-															<div class="date">Just now</div>
-														</div>
-												</a></li>
-												<li><a href="javascript:;">
-														<div class="col1">
-															<div class="cont">
-																<div class="cont-col1">
-																	<div class="label label-sm label-success">
-																		<i class="fa fa-bell-o"></i>
-																	</div>
-																</div>
-																<div class="cont-col2">
-																	<div class="desc">New user registered</div>
-																</div>
-															</div>
-														</div>
-														<div class="col2">
-															<div class="date">Just now</div>
-														</div>
-												</a></li>
-												<li><a href="javascript:;">
-														<div class="col1">
-															<div class="cont">
-																<div class="cont-col1">
-																	<div class="label label-sm label-success">
-																		<i class="fa fa-bell-o"></i>
-																	</div>
-																</div>
-																<div class="cont-col2">
-																	<div class="desc">New user registered</div>
-																</div>
-															</div>
-														</div>
-														<div class="col2">
-															<div class="date">Just now</div>
-														</div>
-												</a></li>
-												<li><a href="javascript:;">
-														<div class="col1">
-															<div class="cont">
-																<div class="cont-col1">
-																	<div class="label label-sm label-success">
-																		<i class="fa fa-bell-o"></i>
-																	</div>
-																</div>
-																<div class="cont-col2">
-																	<div class="desc">New user registered</div>
-																</div>
-															</div>
-														</div>
-														<div class="col2">
-															<div class="date">Just now</div>
-														</div>
-												</a></li>
-												<li><a href="javascript:;">
-														<div class="col1">
-															<div class="cont">
-																<div class="cont-col1">
-																	<div class="label label-sm label-success">
-																		<i class="fa fa-bell-o"></i>
-																	</div>
-																</div>
-																<div class="cont-col2">
-																	<div class="desc">New user registered</div>
-																</div>
-															</div>
-														</div>
-														<div class="col2">
-															<div class="date">Just now</div>
-														</div>
-												</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<!--END TABS-->
+							<div class="desc">Average Orders</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<!-- 3 ô thông báo ở đầu -->
+
+
+
+
+
+
+			<div class="row">
+				<div class="col-md-6">
+					<!-- Begin: life time stats -->
+					<div class="portlet light">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="icon-bar-chart font-green-sharp"></i> <span
+									class="caption-subject font-green-sharp bold uppercase">Overview</span>
+								<span class="caption-helper">weekly stats...</span>
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"> </a> <a
+									href="#portlet-config" data-toggle="modal" class="config">
+								</a> <a href="javascript:;" class="reload"> </a> <a
+									href="javascript:;" class="remove"> </a>
 							</div>
 						</div>
-						<!-- END PORTLET-->
+
+
+						<div class="portlet-body">
+							<div class="tabbable-line">
+								<ul class="nav nav-tabs">
+									<li class="active"><a href="#overview_1" data-toggle="tab">
+											Top Selling </a></li>
+									<li><a href="#overview_2" data-toggle="tab"> Most
+											Viewed </a></li>
+									<li><a href="#overview_3" data-toggle="tab"> Customers
+									</a></li>
+									<li><a href="#overview_4" data-toggle="tab"> Orders </a></li>
+								</ul>
+
+								<!-- Nội dung bên trái -->
+								<div class="tab-content">
+									<div class="tab-pane active" id="overview_1">
+										<div class="table-responsive">
+											<table class="table table-hover table-light">
+												<thead>
+													<tr class="uppercase">
+														<th>Product Name</th>
+														<th>Price</th>
+														<th>Sold</th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody>
+													<!-- Lặp qua danh sách proList -->
+													<c:forEach var="product" items="${proList}">
+														<tr>
+															<td><a href="javascript:;">${product.name}</a> <!-- Hiển thị tên sản phẩm -->
+															</td>
+															<td>$${product.price} <!-- Hiển thị giá sản phẩm, giả sử có thuộc tính price -->
+															</td>
+															<td>${product.sold}<!-- Hiển thị số lượng đã bán, giả sử có thuộc tính sold -->
+															</td>
+															<td><a href="javascript:;"
+																class="btn default btn-xs green-stripe">View</a></td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+
+
+
+
+
+
+									<div class="tab-pane" id="overview_2">
+										<div class="table-responsive">
+											<table class="table table-hover table-light">
+												<thead>
+													<tr class="uppercase">
+														<th>Product Name</th>
+														<th>Price</th>
+														<th>Views</th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><a href="javascript:;"> Metronic - Responsive
+																Admin + Frontend Theme </a></td>
+														<td>$20.00</td>
+														<td>11190</td>
+														<td><a href="javascript:;"
+															class="btn default btn-xs green-stripe"> View </a></td>
+													</tr>
+													<tr>
+														<td><a href="javascript:;"> Regatta Luca 3 in 1
+																Jacket </a></td>
+														<td>$25.50</td>
+														<td>1245</td>
+														<td><a href="javascript:;"
+															class="btn default btn-xs green-stripe"> View </a></td>
+													</tr>
+													<tr>
+														<td><a href="javascript:;"> Apple iPhone 4s -
+																16GB - Black </a></td>
+														<td>$625.50</td>
+														<td>809</td>
+														<td><a href="javascript:;"
+															class="btn default btn-xs green-stripe"> View </a></td>
+													</tr>
+													<tr>
+														<td><a href="javascript:;"> Samsung Galaxy S III
+																SGH-I747 - 16GB </a></td>
+														<td>$915.50</td>
+														<td>6709</td>
+														<td><a href="javascript:;"
+															class="btn default btn-xs green-stripe"> View </a></td>
+													</tr>
+													<tr>
+														<td><a href="javascript:;"> Motorola Droid 4
+																XT894 - 16GB - Black </a></td>
+														<td>$878.50</td>
+														<td>784</td>
+														<td><a href="javascript:;"
+															class="btn default btn-xs green-stripe"> View </a></td>
+													</tr>
+													<tr>
+														<td><a href="javascript:;"> Samsung Galaxy Note 3
+														</a></td>
+														<td>$925.50</td>
+														<td>21245</td>
+														<td><a href="javascript:;"
+															class="btn default btn-xs green-stripe"> View </a></td>
+													</tr>
+													<tr>
+														<td><a href="javascript:;"> Inoval Digital Pen </a></td>
+														<td>$125.50</td>
+														<td>1245</td>
+														<td><a href="javascript:;"
+															class="btn default btn-xs green-stripe"> View </a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+
+
+									<div class="tab-pane" id="overview_3">
+										<div class="table-responsive">
+											<table class="table table-hover table-light">
+												<thead>
+													<tr>
+														<th>Customer Name</th>
+														<th>Total Orders</th>
+														<th>Total Amount</th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody>
+													<!-- Lặp qua danh sách topUsers và hiển thị thông tin -->
+													<c:forEach var="user" items="${topUsers}">
+														<tr>
+															<td><a href="javascript:;">${user[0]}</a> <!-- Hiển thị tên sản phẩm -->
+															</td>
+															<td>${user[1]}<!-- Hiển thị giá sản phẩm, giả sử có thuộc tính price -->
+															</td>
+															<td>${user[2]}<!-- Hiển thị số lượng đã bán, giả sử có thuộc tính sold -->
+															</td>
+															<td><a href="javascript:;"
+																class="btn default btn-xs green-stripe">View</a></td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="tab-pane" id="overview_4">
+										<div class="table-responsive">
+											<table class="table table-hover table-light">
+												<thead>
+													<tr class="uppercase">
+														<th>Customer Name</th>
+														<th>Date</th>
+														<th>Amount</th>
+														<th>Status</th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody>
+													<!-- Lặp qua danh sách orders và hiển thị thông tin -->
+													<c:forEach var="order" items="${last7order}">
+														<tr>
+															<!-- Hiển thị tên khách hàng -->
+															<td><a href="javascript:;">${order.user.firstname}
+																	${order.user.lastname}</a></td>
+															<!-- Hiển thị ngày -->
+															<td><fmt:formatDate value="${order.createdAt}"
+																	pattern="dd MMM, yyyy" /></td>
+															<!-- Hiển thị số tiền -->
+															<td>${order.amountFromUser}</td>
+															<!-- Hiển thị trạng thái đơn hàng -->
+															<td><c:choose>
+																	<c:when test="${order.status == 'NOT_PROCESSED'}">
+																		<span class="label label-sm label-warning">NOT_PROCESSED</span>
+																	</c:when>
+																	<c:when test="${order.status == 'PROCESSED'}">
+																		<span class="label label-sm label-success">PROCESSED</span>
+																	</c:when>
+																	<c:when test="${order.status == 'SHIPPED'}">
+																		<span class="label label-sm label-danger">SHIPPED</span>
+																	</c:when>
+																	<c:when test="${order.status == 'DELIVERED'}">
+																		<span class="label label-sm label-info">DELIVERED</span>
+																	</c:when>
+																	<c:when test="${order.status == 'CANCELLED'}">
+																		<span class="label label-sm label-info">CANCELLED</span>
+																	</c:when>
+																</c:choose></td>
+															<!-- Liên kết xem chi tiết đơn hàng -->
+															<td><a href="javascript:;"
+																class="btn default btn-xs green-stripe">View</a></td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+
+								<!-- Nội dung bên trái -->
+							</div>
+						</div>
 					</div>
+					<!-- End: life time stats -->
 				</div>
-				<!-- END PAGE CONTENT INNER -->
+				<div class="col-md-6">
+					<!-- Begin: life time stats -->
+					<div class="portlet light">
+						<div class="portlet-title tabbable-line">
+							<div class="caption">
+								<i class="icon-share font-red-sunglo"></i> <span
+									class="caption-subject font-red-sunglo bold uppercase">Revenue</span>
+								<span class="caption-helper">weekly stats...</span>
+							</div>
+							<ul class="nav nav-tabs">
+								<li><a href="#portlet_tab2" data-toggle="tab"
+									id="statistics_amounts_tab"> Amounts </a></li>
+								<li class="active"><a href="#portlet_tab1"
+									data-toggle="tab"> Orders </a></li>
+							</ul>
+						</div>
+						<div class="portlet-body">
+							<div class="tab-content">
+								<div class="tab-pane active" id="portlet_tab1">
+									<div id="statistics_1" class="chart"></div>
+								</div>
+								<div class="tab-pane" id="portlet_tab2">
+									<div id="statistics_2" class="chart"></div>
+								</div>
+							</div>
+							<div class="margin-top-20 no-margin no-border">
+								<div class="row">
+									<div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+										<span class="label label-success uppercase"> Revenue: </span>
+										<h3>$99999.999999</h3>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+										<span class="label label-info uppercase"> Tax: </span>
+										<h3>$134,90.10</h3>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+										<span class="label label-danger uppercase"> Shipment: </span>
+										<h3>$1,134,90.10</h3>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+										<span class="label label-warning uppercase"> Orders: </span>
+										<h3>235090</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End: life time stats -->
+				</div>
 			</div>
+			<!-- END PAGE CONTENT INNER -->
 		</div>
-		<!-- END PAGE CONTENT -->
 	</div>
-	<!-- END PAGE CONTAINER -->
+	<!-- END PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTAINER -->

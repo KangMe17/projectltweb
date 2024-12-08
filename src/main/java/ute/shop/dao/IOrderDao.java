@@ -23,5 +23,10 @@ public interface IOrderDao {
 	void saveOrderItem(OrderItem orderItem);
 
 	Order save(Order order);
+	
+	long countTotalOrders();
+	
+	//admin
+	List<Order> findLatestOrders();
 
 }

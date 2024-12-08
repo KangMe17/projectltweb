@@ -244,7 +244,7 @@
 			<!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
 			<div class="hor-menu ">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="index.html">Dashboard</a></li>
+					<li class="active"><a href="${URL}admin/home">Dashboard</a></li>
 					<li class="active"><a href="${URL}admin/manager">Manager</a></li>
 					<li class="menu-dropdown mega-menu-dropdown mega-menu-full ">
 						<a data-hover="megamenu-dropdown" data-close-others="true"

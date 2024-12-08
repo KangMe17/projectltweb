@@ -24,6 +24,8 @@ public class ManagerController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		//Data for datatable
 		IUserService uservice = new UserServiceImpl();
 		IProductService pservice = new ProductServiceImpl();
 		IStoreService sservice = new StoreServiceImpl();

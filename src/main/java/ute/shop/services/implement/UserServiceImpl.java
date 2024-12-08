@@ -59,4 +59,10 @@ public class UserServiceImpl implements IUserService {
 		return userDao.findById(userId);
 	}
 
+	@Override
+	public List<Object[]> findTopUser() {
+		
+		return userDao.findTopUser();
+	}
+
 }

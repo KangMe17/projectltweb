@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+
+
+<div id="page-manager"></div>
 
 <!-- BEGIN PAGE CONTAINER -->
 <div class="page-container">
@@ -57,7 +60,7 @@
 
 									<c:forEach var="product" items="${proList}">
 										<tr>
-											<td>${product._id}</td>
+											<td>${product.store._id}</td>
 
 											<td>${product.name}</td>
 
@@ -201,6 +204,4 @@
 	<!-- END PAGE CONTENT -->
 </div>
 <!-- END PAGE CONTAINER -->
-
-
 

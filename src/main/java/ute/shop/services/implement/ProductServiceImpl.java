@@ -37,4 +37,9 @@ public class ProductServiceImpl implements IProductService {
 	public List<Product> findAll() {
 		return productDao.findAll();
 	}
+
+	@Override
+	public List<Product> findTopSelling() {
+		return productDao.findTopSelling();
+	}
 }
