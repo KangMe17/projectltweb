@@ -41,4 +41,8 @@ public class ProductServiceImpl implements IProductService {
 	public List<Product> findByStoreId(int storeId) {
 		return productDao.findByStoreId(storeId);
 	}
+
+	public List<Product> findTopSelling() {
+		return productDao.findTopSelling();
+	}
 }

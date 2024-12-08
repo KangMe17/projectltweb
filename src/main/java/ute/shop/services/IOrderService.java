@@ -17,6 +17,13 @@ public interface IOrderService {
 	Order placeOrder(int userId, int storeId, int deliveryId, String address, String phone);
 
 	boolean makePayment(int orderId);
+	
+	
+	//@admin tinh tong so order cua he thong
+	long countTotalOrders();
+	
+	//@admin 
+	List<Order> findLatestOrders();
 
 	void save(Order order);
 

@@ -143,4 +143,13 @@ public class OrderServiceImpl implements IOrderService {
 		}
 	}
 
+	public long countTotalOrders() {
+		return orderDao.countTotalOrders();
+	}
+
+	@Override
+	public List<Order> findLatestOrders() {
+		return orderDao.findLatestOrders();
+	}
+
 }

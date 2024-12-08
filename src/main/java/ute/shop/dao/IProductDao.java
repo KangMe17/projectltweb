@@ -9,4 +9,7 @@ public interface IProductDao {
 	List<Product> findAll();
 
 	List<Product> findByStoreId(int storeId);
+	
+	//@dmhisdmh admin
+	List<Product> findTopSelling();
 }
