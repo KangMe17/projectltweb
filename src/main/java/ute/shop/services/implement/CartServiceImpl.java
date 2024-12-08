@@ -13,6 +13,7 @@ import ute.shop.services.ICartService;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CartServiceImpl implements ICartService {
 
@@ -83,31 +84,64 @@ public class CartServiceImpl implements ICartService {
 		// Tìm giỏ hàng theo userId
 		Cart cart = cartDao.findByUserId(userId);
 		if (cart == null) {
-			throw new IllegalArgumentException("Giỏ hàng không tồn tại.");
+			throw new IllegalArgumentException("Giỏ hàng không tồn tại cho user ID: " + userId);
 		}
 
-		// Xóa sản phẩm khỏi danh sách các item
-		List<CartItem> updatedItems = cart.getCartItems().stream()
-				.filter(item -> item.getProduct().get_id() != productId).toList();
+		// Kiểm tra nếu giỏ hàng có item nào
+		if (cart.getCartItems() == null || cart.getCartItems().isEmpty()) {
+			throw new IllegalArgumentException("Giỏ hàng trống, không có sản phẩm để xóa.");
+		}
 
-		if (updatedItems.size() == cart.getCartItems().size()) {
+		System.out.println("Đang xóa sản phẩm với ID: " + productId);
+		System.out.println("Số lượng sản phẩm trong giỏ hàng trước khi xóa: " + cart.getCartItems().size());
+
+		// Tìm sản phẩm cần xóa
+		CartItem itemToRemove = cart.getCartItems().stream().filter(item -> item.getProduct().get_id() == productId)
+				.findFirst().orElse(null);
+
+		if (itemToRemove == null) {
 			throw new IllegalArgumentException("Sản phẩm không tồn tại trong giỏ hàng.");
 		}
 
-		cart.setCartItems(updatedItems);
+		// Xóa sản phẩm khỏi danh sách CartItems
+		cart.getCartItems().remove(itemToRemove);
 		cart.setUpdatedAt(new Date());
-		cartDao.update(cart);
+
+		// Cập nhật lại giỏ hàng vào cơ sở dữ liệu
+		Cart updatedCart = cartDao.update(cart);
+		if (updatedCart == null) {
+			throw new IllegalStateException("Không thể cập nhật giỏ hàng sau khi xóa sản phẩm.");
+		}
+
+		System.out.println(
+				"Xóa sản phẩm thành công. Số lượng sản phẩm sau khi xóa: " + updatedCart.getCartItems().size());
 	}
 
 	@Override
 	public void clearCart(int userId) {
 		Cart cart = cartDao.findByUserId(userId);
 		if (cart == null) {
-			throw new IllegalArgumentException("Giỏ hàng không tồn tại.");
+			throw new IllegalArgumentException("Giỏ hàng không tồn tại cho user ID: " + userId);
 		}
 
-		cart.getCartItems().clear(); // Xóa danh sách item
+		if (cart.getCartItems().isEmpty()) {
+			System.out.println("Giỏ hàng đã trống.");
+			return; // Không cần xử lý thêm nếu giỏ hàng đã trống
+		}
+
+		System.out.println("Xóa toàn bộ giỏ hàng của user ID: " + userId);
+
+		// Xóa tất cả sản phẩm trong giỏ
+		cart.getCartItems().clear();
 		cart.setUpdatedAt(new Date());
-		cartDao.update(cart); // Cập nhật giỏ hàng
+
+		// Lưu lại giỏ hàng trống vào cơ sở dữ liệu
+		Cart updatedCart = cartDao.update(cart);
+		if (updatedCart == null) {
+			throw new IllegalStateException("Không thể xóa toàn bộ giỏ hàng.");
+		}
+
+		System.out.println("Xóa toàn bộ giỏ hàng thành công.");
 	}
+
 }

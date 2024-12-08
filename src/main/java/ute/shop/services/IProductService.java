@@ -22,4 +22,6 @@ public interface IProductService {
 	//admin tim san pham ban chay nhat
 	List<Product> findTopSelling();
 
+	List<Product> findByStoreId(int storeId);
+
 }

@@ -14,18 +14,21 @@ import ute.shop.services.ICartService;
 import ute.shop.services.IProductService;
 import ute.shop.services.implement.CartServiceImpl;
 import ute.shop.services.implement.ProductServiceImpl;
+import ute.shop.services.implement.StoreServiceImpl;
+import ute.shop.services.IStoreService;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = { "/cart", "/cart/add", "/cart/update", "/cart/remove", "/cart/view"	 })
+@WebServlet(urlPatterns = { "/cart", "/cart/add", "/cart/update", "/cart/remove", "/cart/view" })
 public class CartController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	private final ICartService cartService = new CartServiceImpl();
 	private final IProductService productService = new ProductServiceImpl();
+	private final IStoreService storeService = new StoreServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -70,9 +73,15 @@ public class CartController extends HttpServlet {
 			return;
 		}
 
+		// Lấy Cart và Store ID
 		Cart cart = cartService.getCartByUser(currentUser);
-		req.getSession().setAttribute("cart", cart);
+		Integer storeId = storeService.getStoreIdByUserId(currentUser.get_id());
+
+		// Đặt vào session và request
+		req.getSession().setAttribute("storeId", storeId);
 		req.setAttribute("cart", cart);
+		req.setAttribute("storeId", storeId);
+
 		req.getRequestDispatcher("/views/cart.jsp").forward(req, resp);
 	}
 
@@ -139,19 +148,52 @@ public class CartController extends HttpServlet {
 		}
 
 		try {
+			// Lấy productId từ request
 			int productId = Integer.parseInt(req.getParameter("productId"));
+			System.out.println("Attempting to remove product ID: " + productId);
 
+			// Xóa sản phẩm khỏi giỏ hàng bằng service
 			cartService.removeCartItem(currentUser.get_id(), productId);
+
+			// Lấy lại giỏ hàng đã cập nhật
 			Cart updatedCart = cartService.getCartByUser(currentUser);
+			System.out.println("Updated cart size: "
+					+ (updatedCart.getCartItems() != null ? updatedCart.getCartItems().size() : 0));
+
+			// Cập nhật lại session
 			req.getSession().setAttribute("cart", updatedCart);
+
+			// Chuyển hướng về trang giỏ hàng
 			resp.sendRedirect(req.getContextPath() + "/cart/view");
 		} catch (NumberFormatException e) {
+			// Xử lý lỗi nếu `productId` không phải là số
 			e.printStackTrace();
-			resp.sendRedirect(req.getContextPath() + "/error?message=InvalidInput");
+			resp.sendRedirect(req.getContextPath() + "/error?message=Invalid product ID format");
 		} catch (IllegalArgumentException e) {
+			// Xử lý lỗi nếu `productId` không hợp lệ
 			resp.sendRedirect(req.getContextPath() + "/error?message=" + e.getMessage());
+		} catch (Exception e) {
+			// Xử lý các lỗi khác
+			e.printStackTrace();
+			resp.sendRedirect(req.getContextPath() + "/error?message=Unexpected error occurred");
 		}
 	}
 
+	private void clearCart(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		User currentUser = (User) req.getSession().getAttribute("account");
 
+		if (currentUser == null) {
+			resp.sendRedirect(req.getContextPath() + "/login");
+			return;
+		}
+
+		try {
+			cartService.clearCart(currentUser.get_id());
+			req.getSession().removeAttribute("cart"); // Xóa giỏ hàng khỏi session
+			resp.sendRedirect(req.getContextPath() + "/cart/view?success=cart-cleared");
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.sendRedirect(req.getContextPath() + "/error?message=Unable to clear cart");
+		}
+	}
 }

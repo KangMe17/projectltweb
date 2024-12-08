@@ -10,4 +10,6 @@ public interface IStoreDao {
 	Store findByOrderId(int orderId);
 	
 	List<Store> findAll();
+
+	Integer findStoreIdByUserId(int user_id);
 }

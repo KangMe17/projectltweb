@@ -29,8 +29,18 @@ public class StoreServiceImpl implements IStoreService {
 		}
 	}
 
-		@Override
-		public List<Store> findAll() {
-			return storeDao.findAll();
+	@Override
+	public List<Store> findAll() {
+		return storeDao.findAll();
+	}
+
+	@Override
+	public Integer getStoreIdByUserId(int userId) {
+		try {
+			return storeDao.findStoreIdByUserId(userId);
+		} catch (Exception e) {
+			throw new RuntimeException("Error finding store ID by user ID: " + userId, e);
 		}
+	}
+
 }

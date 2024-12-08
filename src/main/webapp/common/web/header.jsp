@@ -40,8 +40,9 @@
 			<div class="row">
 				<div class="col-sm-4">
 					<div class="logo pull-left">
-						<a href="${pageContext.request.contextPath}/home"><img
-							src="${URL}Eshopper/images/home/logo.png" alt="" /></a>
+						<a href="/UTEShop/home"><img
+							src="${pageContext.request.contextPath}/Eshopper/images/home/logo.png"
+							alt="" /></a>
 					</div>
 					<div class="btn-group pull-right">
 						<div class="btn-group">
@@ -72,17 +73,17 @@
 						<ul class="nav navbar-nav">
 							<li><a href="/UTEShop/account"><i class="fa fa-user"></i>
 									Account</a></li>
-							<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-							<li><a href="/UTEShop/orders"><i class="fa fa-crosshairs"></i>
-									Checkout</a></li>
-							<li><a href="/UTEShop/cart"><i class="fa fa-shopping-cart"></i>
-									Cart</a></li>
+							<li><a href="/UTEShop/user/followedProducts"><i
+									class="fa fa-star"></i> Wishlist</a></li>
+							<li><a href="/UTEShop/orders"><i
+									class="fa fa-crosshairs"></i> Checkout</a></li>
+							<li><a href="/UTEShop/cart"><i
+									class="fa fa-shopping-cart"></i> Cart</a></li>
 							<li><c:choose>
 									<c:when test="${not empty sessionScope.account}">
 										<!-- Nếu người dùng đã đăng nhập, hiển thị Đăng xuất và tên người dùng -->
-										<li><a href="${pageContext.request.contextPath}/logout">Đăng
-												xuất</a></li>
-										<li>Chào, ${sessionScope.account.firstname}!</li>
+										<li><a href="${pageContext.request.contextPath}/logout">Chào,
+												${sessionScope.account.firstname} Đăng xuất</a></li>
 									</c:when>
 									<c:otherwise>
 										<!-- Nếu người dùng chưa đăng nhập, hiển thị Đăng nhập -->

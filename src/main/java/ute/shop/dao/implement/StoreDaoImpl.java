@@ -1,4 +1,5 @@
 package ute.shop.dao.implement;
+
 import jakarta.persistence.EntityManager;
 import java.util.List;
 import jakarta.persistence.TypedQuery;
@@ -20,7 +21,7 @@ public class StoreDaoImpl implements IStoreDao {
 		}
 	}
 
-	//find all store
+	// find all store
 	@Override
 	public List<Store> findAll() {
 		EntityManager em = JPAConfig.getEntityManager();
@@ -45,6 +46,20 @@ public class StoreDaoImpl implements IStoreDao {
 		} catch (Exception e) {
 			throw new RuntimeException("Error finding store by order ID", e);
 
+		} finally {
+			em.close();
+		}
+	}
+
+	@Override
+	public Integer findStoreIdByUserId(int userId) {
+		EntityManager em = JPAConfig.getEntityManager();
+		try {
+			// Truy vấn storeId từ Cart dựa trên userId
+			String jpql = "SELECT c.store._id FROM Cart c WHERE c.user._id = :userId";
+			return em.createQuery(jpql, Integer.class).setParameter("userId", userId).getSingleResult();
+		} catch (Exception e) {
+			throw new RuntimeException("Error finding store ID by user ID: " + userId, e);
 		} finally {
 			em.close();
 		}

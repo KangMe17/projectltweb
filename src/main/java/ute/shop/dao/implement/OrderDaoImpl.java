@@ -131,12 +131,12 @@ public class OrderDaoImpl implements IOrderDao {
 		EntityTransaction trans = em.getTransaction();
 		try {
 			trans.begin();
-			em.persist(order); // Lưu đối tượng Order vào cơ sở dữ liệu
+			em.persist(order);
 			trans.commit();
-			return order; // Trả về đối tượng Order vừa lưu
+			return order;
 		} catch (Exception e) {
 			trans.rollback();
-			throw new RuntimeException("Error saving order", e);
+			throw new RuntimeException("Error saving the order", e);
 		} finally {
 			em.close();
 		}

@@ -6,27 +6,27 @@
 </head>
 <body>
 	<h1>Place Your Order</h1>
+
+	<!-- Form đặt hàng -->
 	<form action="${pageContext.request.contextPath}/orders/place"
 		method="post">
-		<div>
-			<label for="address">Address:</label> <input type="text" id="address"
-				name="address" required />
-		</div>
-		<div>
-			<label for="phone">Phone:</label> <input type="text" id="phone"
-				name="phone" required />
-		</div>
-		<div>
-			<label for="paymentMethod">Payment Method:</label> <select
-				id="paymentMethod" name="paymentMethod" required>
-				<option value="credit_card">Credit Card</option>
-				<option value="paypal">PayPal</option>
-				<option value="cash_on_delivery">Cash on Delivery</option>
-			</select>
-		</div>
-		<div>
-			<button type="submit">Place Order</button>
-		</div>
+		<!-- Hiển thị địa chỉ -->
+		<label for="address">Address:</label> <input type="text" id="address"
+			name="address" value="${not empty user.address ? user.address : ''}"
+			required placeholder="Enter your address" /> <br>
+		<!-- Hiển thị số điện thoại -->
+		<label for="phone">Phone:</label> <input type="text" id="phone"
+			name="phone" value="${not empty user.phone ? user.phone : ''}"
+			required placeholder="Enter your phone number" /> <br>
+		<!-- Phương thức giao hàng -->
+		<label for="deliveryId">Delivery Method:</label> <select
+			id="deliveryId" name="deliveryId" required>
+			<c:forEach var="delivery" items="${deliveryList}">
+				<option value="${delivery._id}">${delivery.name}-
+					${delivery.price} USD</option>
+			</c:forEach>
+		</select> <input type="hidden" name="storeId" value="${store._id}" /> <br>
+		<button type="submit">Place Order</button>
 	</form>
 </body>
 </html>

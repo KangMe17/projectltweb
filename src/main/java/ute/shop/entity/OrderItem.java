@@ -25,7 +25,7 @@ public class OrderItem {
 	private Order order; // Tham chiếu đến Order
 
 	@ManyToOne
-	@JoinColumn(name = "product_id", referencedColumnName = "_id", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "product_id", referencedColumnName = "_id", nullable = false)
 	private Product product; // Tham chiếu đến Product
 
 	@ElementCollection
