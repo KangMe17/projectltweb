@@ -9,10 +9,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import ute.shop.config.JPAConfig;
 import ute.shop.dao.guest.implement.CategoryDAO;
 import ute.shop.dao.guest.implement.ProductDAO;
+import ute.shop.dao.guest.implement.ReviewDAO;
 import ute.shop.entity.Product;
+import ute.shop.entity.Review;
 import ute.shop.services.guest.implement.ProductService;
+import ute.shop.services.guest.implement.ReviewService;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/home/productDetail" })
 public class ProductDetailServlet extends HttpServlet {
@@ -21,11 +25,14 @@ public class ProductDetailServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ProductService productService;
+    private ReviewService reviewService;
 
     @Override
     public void init() throws ServletException {
         EntityManager em = JPAConfig.getEntityManager();
         productService = new ProductService(new ProductDAO(em), new CategoryDAO(em));
+        reviewService = new ReviewService(new ReviewDAO(em));
+
     }
 
     @Override
@@ -48,6 +55,8 @@ public class ProductDetailServlet extends HttpServlet {
 
         // Lấy thông tin sản phẩm
         Product product = productService.getProductById(productId);
+        List<Review> reviews = reviewService.findByProduct(product);
+
         if (product == null) {
             response.sendRedirect("/home/searchProduct");
             return;
@@ -55,6 +64,8 @@ public class ProductDetailServlet extends HttpServlet {
 
         // Gửi thông tin sản phẩm tới JSP
         request.setAttribute("product", product);
+        request.setAttribute("reviews", reviews);
+
         request.getRequestDispatcher("/views/guest/productDetail.jsp").forward(request, response);
     }
 }

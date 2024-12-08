@@ -90,6 +90,19 @@ public class ProductDAO {
         return query.getSingleResult().intValue();
     }
     
+    public List<Product> getProductsBySales(int limit) {
+        String jpql = "SELECT p FROM Product p WHERE p.sold >= 10 ORDER BY p.sold DESC";
+        return em.createQuery(jpql, Product.class)
+                 .setMaxResults(limit)
+                 .getResultList();
+    }
+    
+    public List<Product> getProductsByCategory(int categoryId) {
+        TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.category.id = :categoryId", Product.class);
+        query.setParameter("categoryId", categoryId);
+        return query.getResultList();
+    }
+    
    
 }
 

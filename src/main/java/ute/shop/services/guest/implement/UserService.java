@@ -1,6 +1,7 @@
 package ute.shop.services.guest.implement;
 
 import java.util.Date;
+import java.util.List;
 
 import ute.shop.dao.guest.implement.UserDAO;
 import ute.shop.entity.User;
@@ -19,10 +20,11 @@ public class UserService {
             throw new IllegalArgumentException("Email đã tồn tại.");
         }
 
-        // Kiểm tra nếu số điện thoại đã tồn tại
-        if (userDAO.findUserByPhone(user.getPhone()) != null) {
-            throw new IllegalArgumentException("Số điện thoại đã tồn tại.");
-        }
+		/*
+		 * // Kiểm tra nếu số điện thoại đã tồn tại if
+		 * (userDAO.findUserByPhone(user.getPhone()) != null) { throw new
+		 * IllegalArgumentException("Số điện thoại đã tồn tại."); }
+		 */
 
         // Gán thời gian tạo mới
         user.setCreatedAt(new Date());
@@ -36,5 +38,17 @@ public class UserService {
 		 */
         userDAO.saveUser(user);
         return true;
+    }
+    
+    public List<User> searchUsers(String keywords, boolean onlyVerified, int page, int pageSize) {
+        return userDAO.findUsersByKeywords(keywords, onlyVerified, page, pageSize);
+    }
+
+    public int countUsers(String keywords, boolean onlyVerified) {
+        return userDAO.countUsersByKeywords(keywords, onlyVerified);
+    }
+
+    public User getUserById(int id) {
+        return userDAO.findById(id);
     }
 }

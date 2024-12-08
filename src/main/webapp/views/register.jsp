@@ -9,43 +9,58 @@
 <title>V-shopper Register</title>
 </head>
 <body>
-	<section id="form">
-		<!--form-->
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4">
-					<div class="signup-form">
-						<!--sign up form-->
-						<h2>New User Register!</h2>
-						<!-- Hiển thị thông báo -->
-						<c:if test="${not empty message}">
-							<h4 style="color: red;">${message}</h4>
-						</c:if>
-
-						<form method="post" action="${pageContext.request.contextPath}/guest/register" enctype="multipart/form-data">
-							<input type="text" name="firstname" placeholder="Firstname" required /> 
-							<input type="text" name="lastname" placeholder="Lastname" required /> 
-							<input type="text" name="phone" placeholder="SDT" required /> 
-							<input type="text" name="id_card" placeholder="CMND/CCCD" required /> 
-							<input type="email" name="email" placeholder="Email Address" required /> 
-							<input type="password" name="password" placeholder="Password" required /> 
-							<input type="file" name="photo" accept="image/*" required>
-							
-							<!-- Hiển thị ảnh nếu user đã đăng ký -->
-							<c:if test="${not empty user}">
-								<h3>Xin chào, ${user.firstname}!</h3>
-								<img src="${pageContext.request.contextPath}/uploads/${user.avatar}" alt="Avatar của bạn" />
-							</c:if>
-
-							<button type="submit" class="site-btn register-btn">REGISTER</button>
-						</form>
-					</div>
-					<!--/sign up form-->
+	<div class="form_wrapper">
+		<div class="form_container">
+			<div class="title_container">
+				<h2>Đăng kí tài khoản !</h2>
+			</div>
+			
+			<!-- Phần hiển thị thông báo -->
+        <c:if test="${not empty message}">
+            <div class="message">
+                <p style="color: red; font-weight: bold;">${message}</p>
+            </div>
+        </c:if>
+        
+			<div class="row clearfix">
+				<div class="">
+					<form method="post" action="${pageContext.request.contextPath}/guest/register">
+						<div class="input_field">
+							<span><i aria-hidden="true" class="fa fa-envelope"></i></span> <input
+								type="email" name="email" placeholder="Email" required />
+						</div>
+						<div class="input_field">
+							<span><i aria-hidden="true" class="fa fa-lock"></i></span> <input
+								type="password" name="password" placeholder="Password" required />
+						</div>
+						<div class="input_field">
+							<span><i aria-hidden="true" class="fa fa-lock"></i></span> <input
+								type="password" name="re-password" placeholder="Re-type Password"
+								required />
+						</div>
+						<div class="row clearfix">
+							<div class="col_half">
+								<div class="input_field">
+									<span><i aria-hidden="true" class="fa fa-user"></i></span> <input
+										type="text" name="firstname" placeholder="First Name" />
+								</div>
+							</div>
+							<div class="col_half">
+								<div class="input_field">
+									<span><i aria-hidden="true" class="fa fa-user"></i></span> <input
+										type="text" name="lastname" placeholder="Last Name" required />
+								</div>
+							</div>
+						</div>
+						<input class="button" type="submit" value="Register" />
+					</form>
 				</div>
 			</div>
 		</div>
-	</section>
-	<!--/form-->
+	</div>
+	<p class="credit">
+		Đã có tài khoản ? <a href="${pageContext.request.contextPath}/login" target="_blank">Đăng nhập</a>
+	</p>
 </body>
 
 <script>

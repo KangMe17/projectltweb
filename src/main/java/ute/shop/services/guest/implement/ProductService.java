@@ -36,4 +36,15 @@ public class ProductService {
     public List<Category> getAllCategories() {
         return categoryDAO.findAll();
     }
+    
+    /**
+     * Lấy danh sách sản phẩm bán từ 10 sản phẩm trở lên.
+     */
+    public List<Product> getProductsBySales(int limit) {
+        return productDAO.getProductsBySales(limit);
+    }
+    
+    public List<Product> getProductsByCategory(int categoryId) {
+        return productDAO.getProductsByCategory(categoryId);
+    }
 }

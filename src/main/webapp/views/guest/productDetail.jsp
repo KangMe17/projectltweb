@@ -165,16 +165,7 @@
 							</div>
 						</div>
 						<!--/brands_products-->
-						<div class="price-range">
-							<!--price-range-->
-							<h2>Price Range</h2>
-							<div class="well">
-								<input type="text" class="span2" value="" data-slider-min="0"
-									data-slider-max="600" data-slider-step="5"
-									data-slider-value="[250,450]" id="sl2"><br /> <b>$
-									0</b> <b class="pull-right">$ 600</b>
-							</div>
-						</div>
+
 						<!--/price-range-->
 						<div class="shipping text-center">
 							<!--shipping-->
@@ -444,32 +435,21 @@
 							</div>
 						</div>
 						<div class="tab-pane fade active in" id="reviews">
-							<div class="col-sm-12">
-								<ul>
-									<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-									<li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-									<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC
-											2014</a></li>
+							<div class="customer-reviews-container col-sm-12">
+								<h3 class="reviews-title">Customer Reviews</h3>
+								<ul class="reviews-list">
+									<c:forEach items="${reviews}" var="review">
+										<li class="review-item">
+											<p class="review-user">
+												<strong>${review.user.firstname}
+													${review.user.lastname}</strong>
+											</p>
+											<p class="review-date">${review.createdAt}</p>
+											<p class="review-content">${review.content}</p>
+											<p class="review-rating">Rating: ${review.stars} Stars</p>
+										</li>
+									</c:forEach>
 								</ul>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna
-									aliqua.Ut enim ad minim veniam, quis nostrud exercitation
-									ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis
-									aute irure dolor in reprehenderit in voluptate velit esse
-									cillum dolore eu fugiat nulla pariatur.</p>
-								<p>
-									<b>Write Your Review</b>
-								</p>
-								<form action="#">
-									<span> <input type="text" placeholder="Your Name" /> <input
-										type="email" placeholder="Email Address" />
-									</span>
-									<textarea name=""></textarea>
-									<b>Rating: </b> <img src="images/product-details/rating.png"
-										alt="" />
-									<button type="button" class="btn btn-default pull-right">
-										Submit</button>
-								</form>
 							</div>
 						</div>
 					</div>

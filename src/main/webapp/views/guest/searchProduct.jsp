@@ -19,23 +19,25 @@
 					<div class="col-sm-3">
 						<div class="left-sidebar">
 							<h2>Category</h2>
-							<form method="get"
+							<form class="product-search-form" method="get"
 								action="${pageContext.request.contextPath}/home/searchProduct">
 								<input type="hidden" name="keywords" value="${keywords}">
-								<label for="category">Danh mục:</label> <select name="category">
+
+								<label class="form-label" for="category">Danh mục:</label> <select
+									class="form-select" name="category">
 									<option value="">Tất cả</option>
 									<!-- Điền danh mục động -->
 									<c:forEach var="category" items="${categories}">
 										<option value="${category._id}"
 											<c:if test="${param.category == category._id}">selected</c:if>>${category.name}</option>
 									</c:forEach>
-								</select> <label for="minPrice">Giá tối thiểu:</label> <input
-									type="number" name="minPrice" value="${param.minPrice}">
+								</select> <label class="form-label" for="minPrice">Giá tối thiểu:</label>
+								<input class="form-input" type="number" name="minPrice"
+									value="${param.minPrice}"> <label class="form-label"
+									for="maxPrice">Giá tối đa:</label> <input class="form-input"
+									type="number" name="maxPrice" value="${param.maxPrice}">
 
-								<label for="maxPrice">Giá tối đa:</label> <input type="number"
-									name="maxPrice" value="${param.maxPrice}">
-
-								<button type="submit">Lọc</button>
+								<button class="form-button" type="submit">Lọc</button>
 							</form>
 
 
@@ -47,7 +49,9 @@
 
 							<div class="shipping text-center">
 								<!--shipping-->
-								<img src="${pageContext.request.contextPath}/images/home/shipping.jpg" alt="" />
+								<img
+									src="${pageContext.request.contextPath}/images/home/shipping.jpg"
+									alt="" />
 							</div>
 							<!--/shipping-->
 
@@ -105,13 +109,16 @@
 							<!-- Phân trang -->
 							<div>
 								<c:if test="${currentPage > 1}">
-									<a style="font-size: 20px" class=" btn btn-warning" href="?keywords=${keywords}&page=${currentPage - 1}">Previous</a>
+									<a style="font-size: 20px" class=" btn btn-warning"
+										href="?keywords=${keywords}&page=${currentPage - 1}">Previous</a>
 								</c:if>
 								<c:forEach begin="1" end="${totalPages}" var="page">
-									<a style="font-size: 20px" class=" btn btn-warning" href="?keywords=${keywords}&page=${page}">${page}</a>
+									<a style="font-size: 20px" class=" btn btn-warning"
+										href="?keywords=${keywords}&page=${page}">${page}</a>
 								</c:forEach>
 								<c:if test="${currentPage < totalPages}">
-									<a style="font-size: 20px" class=" btn btn-warning" href="?keywords=${keywords}&page=${currentPage + 1}">Next</a>
+									<a style="font-size: 20px" class=" btn btn-warning"
+										href="?keywords=${keywords}&page=${currentPage + 1}">Next</a>
 								</c:if>
 
 							</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
+<link href="${pageContext.request.contextPath}/css/box.css" rel="stylesheet">
 
 <header id="header">
 	<!--header-->
@@ -40,7 +41,7 @@
 			<div class="row">
 				<div class="col-sm-4">
 					<div class="logo pull-left">
-						<a href="/user/home"><img
+						<a href="${pageContext.request.contextPath}/home"><img
 							src="${URL}Eshopper/images/home/logo.png" alt="" /></a>
 					</div>
 					<div class="btn-group pull-right">
@@ -86,8 +87,12 @@
 									</c:when>
 									<c:otherwise>
 										<!-- Nếu người dùng chưa đăng nhập, hiển thị Đăng nhập -->
-										<li><a href="${pageContext.request.contextPath}/login">Đăng
-												nhập</a></li>
+
+										<li><a href="${pageContext.request.contextPath}/login"><i
+												class="fa fa-lock"></i> Login</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/guest/register"><i
+												class="fa fa-lock"></i> Register</a></li>
 									</c:otherwise>
 								</c:choose></li>
 						</ul>
@@ -136,7 +141,24 @@
 				</div>
 				<div class="col-sm-3">
 					<div class="search_box pull-right">
-						<input type="text" placeholder="Search" />
+						<form id="searchForm" method="get"
+							onsubmit="return prepareSearchUrl()">
+							<!-- Input từ khóa -->
+							<input id="keywords" name="keywords" placeholder="Keywords?"
+								required>
+
+							<!-- Select tìm kiếm -->
+							<select name="searchType" id="searchType" required>
+								<option value="product">Tìm sản phẩm</option>
+								<option value="store">Tìm cửa hàng</option>
+								<option value="user">Tìm người dùng</option>
+							</select>
+
+							<!-- Nút tìm kiếm -->
+							<button type="submit">
+								<span class="box"> Search! </span>
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -145,3 +167,30 @@
 	<!--/header-bottom-->
 </header>
 <!--/header-->
+<script>
+    function prepareSearchUrl() {
+        const searchType = document.getElementById("searchType").value;
+        const keywords = document.getElementById("keywords").value.trim();
+
+        // Kiểm tra nếu từ khóa trống
+        if (!keywords) {
+            alert("Vui lòng nhập từ khóa.");
+            return false;
+        }
+
+        // Mã hóa từ khóa và thiết lập URL phù hợp
+        const encodedKeywords = encodeURIComponent(keywords);
+        const form = document.getElementById("searchForm");
+
+        if (searchType === "product") {
+            form.action = `/uteshop/home/searchProduct?keywords=${encodedKeywords}`;
+        } else if (searchType === "store") {
+            form.action = `/uteshop/home/searchStore?keywords=${encodedKeywords}`;
+        } else if (searchType === "user") {
+            form.action = `/uteshop/home/searchUser?keywords=${encodedKeywords}`;
+        }
+
+        // Tiếp tục gửi form
+        return true;
+    }
+</script>

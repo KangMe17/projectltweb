@@ -2519,4 +2519,18 @@ h2.title {
   color: #FE980F;
 }
 
+/* Center the form */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+}
 
+.signup-form form {
+  width: 100%; /* Ensure the form takes full width */
+}
+
+.signup-form input {
+  width: 100%; /* Make inputs full width */
+  margin-bottom: 10px; /* Space between inputs */
+}
