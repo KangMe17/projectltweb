@@ -47,4 +47,17 @@ public class ProductService {
     public List<Product> getProductsByCategory(int categoryId) {
         return productDAO.getProductsByCategory(categoryId);
     }
+    
+    public List<Product> getProductsSortedByPrice(boolean ascending) {
+        if (ascending) {
+            return productDAO.getProductsSortedByPriceAsc();
+        } else {
+            return productDAO.getProductsSortedByPriceDesc();
+        }
+    }
+
+    public List<Product> getProductsByPriceRange(double minPrice, double maxPrice) {
+        return productDAO.getProductsByPriceRange(minPrice, maxPrice);
+    }
+
 }

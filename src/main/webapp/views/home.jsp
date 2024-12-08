@@ -27,7 +27,8 @@
 										<div class="panel-body">
 											<ul>
 												<c:forEach var="product" items="${category.products}">
-													<a href="${pageContext.request.contextPath}/home/productDetail?id=${product._id}"><li>${product.name}</li></a>
+													<a
+														href="${pageContext.request.contextPath}/home/productDetail?id=${product._id}"><li>${product.name}</li></a>
 												</c:forEach>
 											</ul>
 										</div>
@@ -38,10 +39,10 @@
 
 						<!--/category-products-->
 
-						
 
-						<div class="price-range">
-							<!--price-range-->
+
+						<!-- <div class="price-range">
+							price-range
 							<h2>Price Range</h2>
 							<div class="well text-center">
 								<input type="text" class="span2" value="" data-slider-min="0"
@@ -49,7 +50,31 @@
 									data-slider-value="[250,450]" id="sl2"><br /> <b
 									class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
 							</div>
+						</div> -->
+						<!-- Bộ lọc giá tiền -->
+						<div class="price-range">
+							<h2>Price Range</h2>
+							<form action="${pageContext.request.contextPath}/home"
+								method="get" class="well text-center">
+								<input type="number" name="minPrice" class="form-control mb-2"
+									placeholder="Min Price ($)" /> <input type="number"
+									name="maxPrice" class="form-control mb-2"
+									placeholder="Max Price ($)" />
+								<button type="submit" class="btn btn-primary">Filter</button>
+							</form>
 						</div>
+
+						<!-- Nút sắp xếp giá -->
+						<div class="sorting mt-3">
+							<h2>Sort By</h2>
+							<button class="btn btn-secondary"
+								onclick="location.href='${pageContext.request.contextPath}/home?sort=sales'">Bán chạy</button>
+							<button class="btn btn-secondary"
+								onclick="location.href='${pageContext.request.contextPath}/home?sort=priceAsc'">Giá: Thấp đến cao</button>
+							<button class="btn btn-secondary"
+								onclick="location.href='${pageContext.request.contextPath}/home?sort=priceDesc'">Giá: Cao đến thấp</button>
+						</div>
+
 						<!--/price-range-->
 
 						<div class="shipping text-center">
@@ -64,30 +89,22 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items">
 						<!--features_items-->
-						<h2 class="title text-center">Sản phẩm bán chạy nhất</h2>
-						<c:forEach var="product" items="${topProducts}">
-
+						<h2 class="title text-center">Danh sách sản phẩm</h2>
+						<c:forEach var="product" items="${products}">
 							<div class="col-sm-4">
 								<div class="product-image-wrapper">
 									<div class="single-products">
 										<div class="productinfo text-center">
 											<a
 												href="${pageContext.request.contextPath}/home/productDetail?id=${product._id}">
-												<img src="${URL}Eshopper/images/home/product1.jpg" alt="" />
+												<img src="Eshopper/images/home/product1.jpg" alt="" />
 											</a>
 											<h2>${product.price}$</h2>
 											<p>${product.name}</p>
-											<a href="#" class="btn btn-default add-to-cart"><i
-												class="fa fa-shopping-cart"></i>Add to cart</a>
+											<a href="#" class="btn btn-default add-to-cart"> <i
+												class="fa fa-shopping-cart"></i>Add to cart
+											</a>
 										</div>
-										<%-- <div class="product-overlay">
-											<div class="overlay-content">
-												<h2>${product.price}$</h2>
-												<p>${product.name}</p>
-												<a href="#" class="btn btn-default add-to-cart"><i
-													class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-										</div> --%>
 									</div>
 									<div class="choose">
 										<ul class="nav nav-pills nav-justified">
@@ -100,58 +117,58 @@
 								</div>
 							</div>
 						</c:forEach>
-
 					</div>
+
 					<!--features_items-->
-<!-- Tab Category -->
-<div class="category-tab">
-	<!--category-tab-->
-	<div class="col-sm-12">
-		<ul class="nav nav-tabs">
-			<c:forEach var="category" items="${randomcategories}" varStatus="status">
-				<li class="${status.first ? 'active' : ''}">
-					<a href="#category-${category._id}" data-toggle="tab" 
-					   onclick="loadProducts(${category._id})">${category.name}</a>
-				</li>
-			</c:forEach>
-		</ul>
-	</div>
-	<div class="tab-content">
-		<div class="tab-pane fade active in" id="products-container">
-			<c:forEach var="product" items="${products}">
-				<div class="col-sm-4">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="${pageContext.request.contextPath}/images/shop/1001.jpg" 
-								     alt="" style="width: 260px; height: 260px" />
-								<h2>${product.price}$</h2>
-								<p>${product.name}</p>
-								<a href="${pageContext.request.contextPath}/home/productDetail?id=${product._id}" 
-								   class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-						</div>
-						<div class="choose">
-							<ul class="nav nav-pills nav-justified">
-								<li>
-									<a href="${pageContext.request.contextPath}/home/productDetail?id=${product._id}">
-										<i class="fa fa-plus-square"></i>Views Details
-									</a>
-								</li>
-								<li>
-									<a href="/home/cart/add/${product._id}">
-										<i class="fa fa-plus-square"></i>Add to cart 
-									</a>
-								</li>
+					<!-- Tab Category -->
+					<div class="category-tab">
+						<!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<c:forEach var="category" items="${randomcategories}"
+									varStatus="status">
+									<li class="${status.first ? 'active' : ''}"><a
+										href="#category-${category._id}" data-toggle="tab"
+										onclick="loadProducts(${category._id})">${category.name}</a></li>
+								</c:forEach>
 							</ul>
 						</div>
+						<div class="tab-content">
+							<div class="tab-pane fade active in" id="products-container">
+								<c:forEach var="product" items="${productsCate}">
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img
+														src="${pageContext.request.contextPath}/images/shop/1001.jpg"
+														alt="" style="width: 260px; height: 260px" />
+													<h2>${product.price}$</h2>
+													<p>${product.name}</p>
+													<a
+														href="${pageContext.request.contextPath}/home/productDetail?id=${product._id}"
+														class="btn btn-default add-to-cart"><i
+														class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+											</div>
+											<div class="choose">
+												<ul class="nav nav-pills nav-justified">
+													<li><a
+														href="${pageContext.request.contextPath}/home/productDetail?id=${product._id}">
+															<i class="fa fa-plus-square"></i>Views Details
+													</a></li>
+													<li><a href="/home/cart/add/${product._id}"> <i
+															class="fa fa-plus-square"></i>Add to cart
+													</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
 					</div>
-				</div>
-			</c:forEach>
-		</div>
-	</div>
-</div>
-<!--/category-tab-->
+					<!--/category-tab-->
 
 
 					<div class="recommended_items">
