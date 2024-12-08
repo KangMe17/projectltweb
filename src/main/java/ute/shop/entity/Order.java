@@ -84,6 +84,6 @@ public class Order {
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Review> reviews = new ArrayList<>(); // Một Order có thể có nhiều Review
 
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<OrderItem> orderItems = new ArrayList<>(); // Một Order có thể có nhiều OrderItem
 }

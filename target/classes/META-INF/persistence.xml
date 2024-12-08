@@ -5,7 +5,6 @@
                                  https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
     <persistence-unit name="dataSource">
-    
         <!-- Add any other entities here as needed -->
         
         <properties>

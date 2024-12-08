@@ -76,6 +76,10 @@ public class User {
 		updatedAt = new Date();
 	}
 
+	public User(int id) {
+		this._id = id;
+	}
+
 	public enum Role {
 		USER, ADMIN;
 

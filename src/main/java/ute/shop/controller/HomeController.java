@@ -20,7 +20,7 @@ import ute.shop.services.guest.implement.CategoryService;
 import ute.shop.services.guest.implement.ProductService;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = { "/home" })
+@WebServlet(urlPatterns = { "/home"})
 public class HomeController extends HttpServlet {
     private ProductService productService;
     private CategoryService categoryService;
@@ -59,4 +59,3 @@ public class HomeController extends HttpServlet {
         req.getRequestDispatcher("/views/home.jsp").forward(req, resp);
     }
 }
-

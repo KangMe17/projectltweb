@@ -17,6 +17,11 @@ import java.util.List;
 @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
 public class Product {
 
+	// Constructor chỉ nhận ID
+	public Product(int id) {
+		this._id = id;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int _id;
@@ -56,7 +61,7 @@ public class Product {
 	@JoinColumn(name = "category_id", nullable = false)
 	private Category category; // Tham chiếu đến Category
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name = "style_value_ids")
 	private List<String> styleValueIds;
 
@@ -96,7 +101,7 @@ public class Product {
 	private List<Review> reviews = new ArrayList<>(); // Một Product có thể có nhiều Review
 
 	// One-to-Many relationship with CartItem
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<CartItem> cartItems = new ArrayList<>(); // Một Product có thể có nhiều CartItem
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

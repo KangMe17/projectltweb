@@ -16,4 +16,7 @@ public interface IUserDao {
 	User findByEmail(String email);
 	
 	User findById(int userId);
+	
+	//admin
+	List<Object[]> findTopUser();
 }
