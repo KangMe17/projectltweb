@@ -52,6 +52,7 @@
 							</div>
 						</div> -->
 						<!-- Bộ lọc giá tiền -->
+						<!-- Bộ lọc giá tiền -->
 						<div class="price-range">
 							<h2>Price Range</h2>
 							<form action="${pageContext.request.contextPath}/home"
@@ -64,15 +65,19 @@
 							</form>
 						</div>
 
+
 						<!-- Nút sắp xếp giá -->
 						<div class="sorting mt-3">
 							<h2>Sort By</h2>
 							<button class="btn btn-secondary"
-								onclick="location.href='${pageContext.request.contextPath}/home?sort=sales'">Bán chạy</button>
+								onclick="location.href='${pageContext.request.contextPath}/home?sort=sales'">Bán
+								chạy</button>
 							<button class="btn btn-secondary"
-								onclick="location.href='${pageContext.request.contextPath}/home?sort=priceAsc'">Giá: Thấp đến cao</button>
+								onclick="location.href='${pageContext.request.contextPath}/home?sort=priceAsc'">Giá:
+								Thấp đến cao</button>
 							<button class="btn btn-secondary"
-								onclick="location.href='${pageContext.request.contextPath}/home?sort=priceDesc'">Giá: Cao đến thấp</button>
+								onclick="location.href='${pageContext.request.contextPath}/home?sort=priceDesc'">Giá:
+								Cao đến thấp</button>
 						</div>
 
 						<!--/price-range-->
