@@ -102,7 +102,23 @@ public class ProductDAO {
         query.setParameter("categoryId", categoryId);
         return query.getResultList();
     }
-    
+    public List<Product> getProductsSortedByPriceAsc() {
+        return em.createQuery("SELECT p FROM Product p ORDER BY p.price ASC", Product.class)
+                 .getResultList();
+    }
+
+    public List<Product> getProductsSortedByPriceDesc() {
+        return em.createQuery("SELECT p FROM Product p ORDER BY p.price DESC", Product.class)
+                 .getResultList();
+    }
+
+    public List<Product> getProductsByPriceRange(double minPrice, double maxPrice) {
+        return em.createQuery("SELECT p FROM Product p WHERE p.price BETWEEN :minPrice AND :maxPrice", Product.class)
+                 .setParameter("minPrice", minPrice)
+                 .setParameter("maxPrice", maxPrice)
+                 .getResultList();
+    }
+
    
 }
 
