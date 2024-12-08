@@ -126,8 +126,8 @@
 							<li>Total <span>${item.product.price * item.count + 2}</span></li>
 						</ul>
 						<a class="btn btn-default update"
-							href="${pageContext.request.contextPath}/orders/place">Proceed to
-							Checkout</a>
+							href="${pageContext.request.contextPath}/orders/place?storeId=${storeId}">
+							Proceed to Place Order </a>
 					</c:forEach>
 				</div>
 			</div>

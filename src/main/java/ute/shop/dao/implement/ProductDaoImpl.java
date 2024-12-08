@@ -35,4 +35,18 @@ public class ProductDaoImpl implements IProductDao {
 			em.close();
 		}
 	}
+
+	@Override
+	public List<Product> findByStoreId(int storeId) {
+		EntityManager em = JPAConfig.getEntityManager();
+		try {
+			String query = "SELECT p FROM Product p WHERE p.store._id = :storeId";
+			return em.createQuery(query, Product.class).setParameter("storeId", storeId).getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			em.close();
+		}
+	}
 }

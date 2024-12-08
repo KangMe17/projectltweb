@@ -19,4 +19,6 @@ public interface IProductService {
 
 	List<Product> findAll();
 
+	List<Product> findByStoreId(int storeId);
+
 }

@@ -10,6 +10,9 @@ public interface IStoreService {
 
 	Store getStoreByOrder(int orderId);
 	List<Store> findAll();
+
+	Integer getStoreIdByUserId(int user_id);
+
 }
 
 
