@@ -7,4 +7,7 @@ public interface IProductDao {
 	Product findById(int productId);
 	//@dmhisdmh admin
 	List<Product> findAll();
+	
+	//@dmhisdmh admin
+	List<Product> findTopSelling();
 }

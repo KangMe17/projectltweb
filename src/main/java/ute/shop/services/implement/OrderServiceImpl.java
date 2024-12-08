@@ -99,4 +99,14 @@ public class OrderServiceImpl implements IOrderService {
 		return orderDao.save(order) != null;
 	}
 
+	@Override
+	public long countTotalOrders() {
+		return orderDao.countTotalOrders();
+	}
+
+	@Override
+	public List<Order> findLatestOrders() {
+		return orderDao.findLatestOrders();
+	}
+
 }

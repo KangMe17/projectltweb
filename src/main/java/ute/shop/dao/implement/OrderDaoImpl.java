@@ -141,5 +141,36 @@ public class OrderDaoImpl implements IOrderDao {
 			em.close();
 		}
 	}
+	
+	@Override
+	public long countTotalOrders() {
+		EntityManager em = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT COUNT(o._id) FROM Order o";
+			return em.createQuery(jpql, Long.class).getSingleResult();
+		} catch (Exception e) {
+			throw new RuntimeException("Error counting total orders", e);
+		} finally {
+			em.close();
+		}
+	}
+	
+	@Override
+	public List<Order> findLatestOrders() {
+	    EntityManager em = JPAConfig.getEntityManager();
+	    try {
+	        // JPQL truy vấn lấy 7 đơn hàng gần nhất theo trường createdAt
+	        String jpql = "SELECT o FROM Order o ORDER BY o.createdAt DESC";
+	        
+	        TypedQuery<Order> query = em.createQuery(jpql, Order.class);
+	        query.setMaxResults(7);  // Giới hạn lấy 7 đơn hàng gần nhất
+	        
+	        return query.getResultList();
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error fetching latest orders", e);
+	    } finally {
+	        em.close();
+	    }
+	}
 
 }

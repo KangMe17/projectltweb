@@ -16,7 +16,10 @@ public interface IProductService {
 
 	Product findById(int productId);
 
-
+	//admin tim tan ca san pham
 	List<Product> findAll();
+	
+	//admin tim san pham ban chay nhat
+	List<Product> findTopSelling();
 
 }

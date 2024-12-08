@@ -154,6 +154,14 @@
 		type="text/javascript"></script>
 	<script src="${URL}assets/global/plugins/jquery.sparkline.min.js"
 		type="text/javascript"></script>
+
+	<script src="${URL}assets/global/plugins/flot/jquery.flot.js"
+		type="text/javascript"></script>
+	<script src="${URL}assets/global/plugins/flot/jquery.flot.resize.js"
+		type="text/javascript"></script>
+	<script
+		src="${URL}assets/global/plugins/flot/jquery.flot.categories.js"
+		type="text/javascript"></script>
 	<!-- END PAGE LEVEL PLUGINS -->
 
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
@@ -169,16 +177,24 @@
 		type="text/javascript"></script>
 	<script src="${URL}assets/admin/pages/scripts/tasks.js"
 		type="text/javascript"></script>
+	<script src="${URL}assets/admin/pages/scripts/ecommerce-index.js"></script>
 	<!-- END PAGE LEVEL SCRIPTS -->
 
 	<script>
 		jQuery(document).ready(function() {
-			Metronic.init(); // Init core components
-			Layout.init(); // Init layout
-			Demo.init(); // Init demo features
-			TableAdvanced.init(); // Init advanced table
-			Index.init(); // Init index page
-			Tasks.initDashboardWidget(); // Init dashboard widget
+			if ($('#page-home').length > 0) {
+				Metronic.init(); // init metronic core components
+				Layout.init(); // init current layout
+				Demo.init(); // init demo features
+				EcommerceIndex.init();
+			}
+
+			if ($('#page-manager').length > 0) {
+				Metronic.init(); // Init Metronic core components
+				Layout.init(); // Init layout
+				Demo.init(); // Init demo features
+				TableAdvanced.init(); // Init advanced table
+			}
 		});
 	</script>
 	<!-- END JAVASCRIPTS -->

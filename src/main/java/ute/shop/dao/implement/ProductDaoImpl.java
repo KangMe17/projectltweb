@@ -35,4 +35,18 @@ public class ProductDaoImpl implements IProductDao {
 			em.close();
 		}
 	}
+
+	@Override
+	public List<Product> findTopSelling() {
+		EntityManager em = JPAConfig.getEntityManager();
+		try {
+			TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p ORDER BY p.sold DESC", Product.class);
+			query.setMaxResults(7);
+			return query.getResultList();
+		} catch (Exception e) {
+			throw new RuntimeException("Error finding top selling product", e);
+		} finally {
+			em.close();
+		}
+	}
 }
