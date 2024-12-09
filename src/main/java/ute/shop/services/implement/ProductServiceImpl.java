@@ -1,6 +1,5 @@
 package ute.shop.services.implement;
 
-
 import java.util.List;
 
 import ute.shop.dao.IProductDao;
@@ -32,13 +31,17 @@ public class ProductServiceImpl implements IProductService {
 	public Product findById(int productId) {
 		return findProductById(productId);
 	}
-	
+
 	@Override
 	public List<Product> findAll() {
 		return productDao.findAll();
 	}
 
 	@Override
+	public List<Product> findByStoreId(int storeId) {
+		return productDao.findByStoreId(storeId);
+	}
+
 	public List<Product> findTopSelling() {
 		return productDao.findTopSelling();
 	}

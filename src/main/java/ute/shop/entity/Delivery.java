@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -50,6 +52,6 @@ public class Delivery {
 		updatedAt = new Date();
 	}
 
-	@OneToOne(mappedBy = "delivery", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Order order;
+	@OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
+	private List<Order> orders = new ArrayList<>();
 }

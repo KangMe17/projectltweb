@@ -11,6 +11,7 @@ public interface IStoreDao {
 	Store findByOrderId(int orderId);
 	
 	List<Store> findAll();
+
 	
 	List<Commission> findAllComission();
 	
@@ -18,4 +19,6 @@ public interface IStoreDao {
 	Commission findComById(int comId);
 	
 	void addStore(Store store);
+
+	Integer findStoreIdByUserId(int user_id);
 }

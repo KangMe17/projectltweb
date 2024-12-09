@@ -41,9 +41,10 @@
 	href="${pageContext.request.contextPath}/Eshopper/images/ico/apple-touch-icon-114-precomposed.png">
 <link rel="apple-touch-icon-precomposed" sizes="72x72"
 	href="${pageContext.request.contextPath}/Eshopper/images/ico/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed"
-	href="${pageContext.request.contextPath}/Eshopper/images/ico/apple-touch-icon-57-precomposed.png">
-
+<link rel="apple-touch-icon-precomposed" href="${URL}Eshopper/images/ico/apple-touch-icon-57-precomposed.png">
+	
+	<%@ include file="/common/css-link.jsp"%>
+	
 </head>
 <!--/head-->
 
@@ -61,17 +62,98 @@
 
 
 
+<<<<<<< HEAD
+	<script src="${URL}Eshopper/js/jquery.js"></script>
+	<script src="${URL}Eshopper/js/bootstrap.min.js"></script>
+	<script src="${URL}Eshopper/js/jquery.scrollUp.min.js"></script>
+	<script src="${URL}Eshopper/js/price-range.js"></script>
+	<script src="${URL}Eshopper/js/jquery.prettyPhoto.js"></script>
+	<script src="${URL}Eshopper/js/main.js"></script>
+	<script>
+    function previewImage(event) {
+        const file = event.target.files[0];
+        const previewImage = document.getElementById('preview-image');
+        
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewImage.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewImage.src = '';
+            previewImage.style.display = 'none';
+        }
+    }
+    
+    $(function() {
+		$("#slider-range").slider({
+			range : true,
+			min : 0,
+			max : 200,
+			values : [ 0, 0 ],
+			slide : function(event, ui) {
+				$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+				$("#amount_start").val(ui.values[0]);
+				$("#amount_end").val(ui.values[1]);
+			}
+		});
+		/* $("#amount").val(
+				"$" + $("#slider-range").slider("values", 0) + " - $"
+						+ $("#slider-range").slider("values", 1)); */
+	});
 
-	<script src="${pageContext.request.contextPath}/Eshopper/js/jquery.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/Eshopper/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/Eshopper/js/jquery.scrollUp.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/Eshopper/js/price-range.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/Eshopper/js/jquery.prettyPhoto.js"></script>
-	<script src="${pageContext.request.contextPath}/Eshopper/js/main.js"></script>
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				$('.image-upload-wrap').hide();
+
+				$('.file-upload-image').attr('src', e.target.result);
+				$('.file-upload-content').show();
+
+				$('.image-title').html(input.files[0].name);
+			};
+
+			reader.readAsDataURL(input.files[0]);
+
+		} else {
+			removeUpload();
+		}
+	}
+
+	function removeUpload() {
+		$('.file-upload-input').replaceWith($('.file-upload-input').clone());
+		$('.file-upload-content').hide();
+		$('.image-upload-wrap').show();
+	}
+	$('.image-upload-wrap').bind('dragover', function() {
+		$('.image-upload-wrap').addClass('image-dropping');
+	});
+	$('.image-upload-wrap').bind('dragleave', function() {
+		$('.image-upload-wrap').removeClass('image-dropping');
+	});
+	
+	
+	function loadProducts(categoryId) {
+		$.ajax({
+			url: '/home/productsByCategory', // URL đến API backend
+			type: 'GET',
+			data: { categoryId: categoryId },
+			success: function(response) {
+				// Cập nhật danh sách sản phẩm
+				$('#products-container').html(response);
+			},
+			error: function(err) {
+				console.error('Error loading products:', err);
+			}
+		});
+	}
+</script>
+
 
 </body>
 </html>

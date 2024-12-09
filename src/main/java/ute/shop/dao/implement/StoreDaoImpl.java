@@ -1,4 +1,5 @@
 package ute.shop.dao.implement;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
@@ -27,7 +28,7 @@ public class StoreDaoImpl implements IStoreDao {
 		}
 	}
 
-	//find all store
+	// find all store
 	@Override
 	public List<Store> findAll() {
 		EntityManager em = JPAConfig.getEntityManager();
@@ -71,9 +72,24 @@ public class StoreDaoImpl implements IStoreDao {
 		}
 	}
 
+	
+	
+	public Integer findStoreIdByUserId(int userId) {
+		EntityManager em = JPAConfig.getEntityManager();
+		try {
+			// Truy vấn storeId từ Cart dựa trên userId
+			String jpql = "SELECT c.store._id FROM Cart c WHERE c.user._id = :userId";
+			return em.createQuery(jpql, Integer.class).setParameter("userId", userId).getSingleResult();
+		} catch (Exception e) {
+			throw new RuntimeException("Error finding store ID by user ID: " + userId, e);
+		} finally {
+			em.close();
+		}
+	}
+
 	@Override
 	public void updateStore(Store store) {
-		
+
 		EntityManager em = JPAConfig.getEntityManager();
 		EntityTransaction trans = em.getTransaction();
 		try {
@@ -99,7 +115,7 @@ public class StoreDaoImpl implements IStoreDao {
 			em.close();
 		}
 	}
-	
+
 	@Override
 	public void addStore(Store store) {
 		EntityManager em = JPAConfig.getEntityManager();
@@ -107,7 +123,7 @@ public class StoreDaoImpl implements IStoreDao {
 
 		try {
 			trans.begin();
-				em.persist(store);
+			em.persist(store);
 			trans.commit();
 		} catch (Exception e) {
 			trans.rollback();
@@ -119,46 +135,46 @@ public class StoreDaoImpl implements IStoreDao {
 
 	
 	
-	 public static void main(String[] args) {
-	        // Tạo đối tượng StoreDAO để gọi hàm addStore
-	        IStoreDao storeDAO = new StoreDaoImpl();
+	public static void main(String[] args) {
+        // Tạo đối tượng StoreDAO để gọi hàm addStore
+        IStoreDao storeDAO = new StoreDaoImpl();
 
-	        // Tạo một đối tượng Store mới để thêm vào cơ sở dữ liệu
-	        Store store = new Store();
-	        store.setName("Tech Store");
-	        store.setBio("A store specializing in tech products.");
-	        store.setSlug("tech-store");
-	        store.setIsActive(true);
-	        store.setIsOpen(true);
-	        store.setAvatar("avatar.jpg");
-	        store.setCover("cover.jpg");
-	        store.setFeaturedImages(List.of("feature1.jpg", "feature2.jpg"));
-	        store.setCommissionSold(10.0);
-	        store.setPoint(100);
-	        store.setRating(4.5);
-	        store.setE_wallet(5000.0);
-	        //store.setCreatedAt(new Date());
+        // Tạo một đối tượng Store mới để thêm vào cơ sở dữ liệu
+        Store store = new Store();
+        store.setName("Tech Store");
+        store.setBio("A store specializing in tech products.");
+        store.setSlug("tech-store");
+        store.setIsActive(true);
+        store.setIsOpen(true);
+        store.setAvatar("avatar.jpg");
+        store.setCover("cover.jpg");
+        store.setFeaturedImages(List.of("feature1.jpg", "feature2.jpg"));
+        store.setCommissionSold(10.0);
+        store.setPoint(100);
+        store.setRating(4.5);
+        store.setE_wallet(5000.0);
+        //store.setCreatedAt(new Date());
 
-	        // Tạo một đối tượng User làm chủ sở hữu của Store
-	        User owner = new User();
-	        owner.set_id(10); // Giả sử user ID 1 đã tồn tại trong cơ sở dữ liệu
-	        store.setOwner(owner);
+        // Tạo một đối tượng User làm chủ sở hữu của Store
+        User owner = new User();
+        owner.set_id(10); // Giả sử user ID 1 đã tồn tại trong cơ sở dữ liệu
+        store.setOwner(owner);
 
-	        // Tạo StoreLevel và Commission giả định (phải tồn tại trong cơ sở dữ liệu)
-	        StoreLevel storeLevel = new StoreLevel();
-	        storeLevel.set_id(16); // ID đã tồn tại
-	        store.setStoreLevel(storeLevel);
+        // Tạo StoreLevel và Commission giả định (phải tồn tại trong cơ sở dữ liệu)
+        StoreLevel storeLevel = new StoreLevel();
+        storeLevel.set_id(16); // ID đã tồn tại
+        store.setStoreLevel(storeLevel);
 
-	        Commission commission = new Commission();
-	        commission.set_id(16); // ID đã tồn tại
-	        store.setCommission(commission);
+        Commission commission = new Commission();
+        commission.set_id(16); // ID đã tồn tại
+        store.setCommission(commission);
 
-	        // Gọi phương thức thêm Store
-	        try {
-	            storeDAO.addStore(store);
-	            System.out.println("Store added successfully!");
-	        } catch (Exception e) {
-	            System.err.println("Error adding store: " + e.getMessage());
-	        }
-	    }
+        // Gọi phương thức thêm Store
+        try {
+            storeDAO.addStore(store);
+            System.out.println("Store added successfully!");
+        } catch (Exception e) {
+            System.err.println("Error adding store: " + e.getMessage());
+        }
+    }
 }

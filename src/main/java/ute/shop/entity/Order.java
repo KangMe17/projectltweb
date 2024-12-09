@@ -29,9 +29,9 @@ public class Order {
 	@JoinColumn(name = "store_id", nullable = false)
 	private Store store; // Tham chiếu tới Store
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "delivery_id", referencedColumnName = "_id", nullable = false)
-	private Delivery delivery; // Tham chiếu đến Delivery
+	private Delivery delivery;
 
 	@ManyToOne
 	@JoinColumn(name = "commission_id", referencedColumnName = "_id", nullable = false)

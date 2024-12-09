@@ -1,6 +1,7 @@
 package ute.shop.entity;
 
 import jakarta.persistence.metamodel.EntityType;
+import jakarta.persistence.metamodel.ListAttribute;
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
 import java.math.BigDecimal;
@@ -14,10 +15,10 @@ public abstract class Delivery_ {
 	public static final String PRICE = "price";
 	public static final String NAME = "name";
 	public static final String DESCRIPTION = "description";
+	public static final String ORDERS = "orders";
 	public static final String QUERY_DELIVERY_FIND_ALL = "Delivery.findAll";
 	public static final String _ID = "_id";
 	public static final String UPDATED_AT = "updatedAt";
-	public static final String ORDER = "order";
 
 	
 	/**
@@ -46,6 +47,11 @@ public abstract class Delivery_ {
 	public static volatile SingularAttribute<Delivery, String> description;
 	
 	/**
+	 * @see ute.shop.entity.Delivery#orders
+	 **/
+	public static volatile ListAttribute<Delivery, Order> orders;
+	
+	/**
 	 * @see ute.shop.entity.Delivery#_id
 	 **/
 	public static volatile SingularAttribute<Delivery, Integer> _id;
@@ -59,11 +65,6 @@ public abstract class Delivery_ {
 	 * @see ute.shop.entity.Delivery#updatedAt
 	 **/
 	public static volatile SingularAttribute<Delivery, Date> updatedAt;
-	
-	/**
-	 * @see ute.shop.entity.Delivery#order
-	 **/
-	public static volatile SingularAttribute<Delivery, Order> order;
 
 }
 

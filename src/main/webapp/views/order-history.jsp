@@ -22,9 +22,9 @@
 								thái</th>
 							<th style="padding: 12px 15px; text-align: center;">Tổng
 								tiền</th>
-							<th style="padding: 12px 15px; text-align: center;">Store ID</th>
+							<th style="padding: 12px 15px; text-align: center;">Store Name</th>
 							<th style="padding: 12px 15px; text-align: center;">Product
-								ID</th>
+								Name</th>
 							<th style="padding: 12px 15px; text-align: center;">Hành
 								động</th>
 						</tr>
@@ -32,15 +32,17 @@
 					<tbody>
 						<c:forEach var="order" items="${orders}">
 							<tr style="border-bottom: 1px solid #ddd;">
+								<!-- Hiển thị Mã đơn hàng và các thông tin khác -->
 								<td style="padding: 12px 15px; text-align: center;">${order._id}</td>
 								<td style="padding: 12px 15px; text-align: center;">${order.createdAt}</td>
 								<td style="padding: 12px 15px; text-align: center;">${order.status}</td>
 								<td style="padding: 12px 15px; text-align: center;">${order.amountFromUser}</td>
-								<td style="padding: 12px 15px; text-align: center;">${order.store._id}</td>
-								<!-- Hiển thị Product ID từ OrderItems -->
+								<!-- Hiển thị tên cửa hàng thay vì Store ID -->
+								<td style="padding: 12px 15px; text-align: center;">${order.store.name}</td>
+								<!-- Hiển thị tên sản phẩm thay vì Product ID -->
 								<td style="padding: 12px 15px; text-align: center;"><c:forEach
 										var="item" items="${order.orderItems}">
-										<p>${item.product._id}</p>
+										<p>${item.product.name}</p>
 									</c:forEach></td>
 								<td style="padding: 12px 15px; text-align: center;">
 									<!-- Hủy đơn hàng nếu trạng thái là 'NOT_PROCESSED' --> <c:if
@@ -72,6 +74,7 @@
 							</tr>
 						</c:forEach>
 					</tbody>
+
 				</table>
 			</c:when>
 			<c:otherwise>

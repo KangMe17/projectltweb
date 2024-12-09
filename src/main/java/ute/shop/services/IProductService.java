@@ -27,4 +27,6 @@ public interface IProductService {
 	void deleteProduct(int id);
 	void addProduct(Product product);
 
+	List<Product> findByStoreId(int storeId);
+
 }

@@ -19,6 +19,8 @@ public interface IStoreService {
 	void updateStore(Store store);
 	
 	void addStore(Store store);
+
+	Integer getStoreIdByUserId(int user_id);
 }
 
 

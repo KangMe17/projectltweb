@@ -53,7 +53,7 @@ public class Product {
 	@Column(nullable = false)
 	private Boolean isSelling = true;
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name = "list_images")
 	private List<String> listImages;
 
