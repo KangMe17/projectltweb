@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,12 +26,12 @@ public class CartItem {
 	private Cart cart; // Tham chiếu đến Cart
 
 	@ManyToOne
-	@JoinColumn(name = "product_id", referencedColumnName = "_id", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "product_id", referencedColumnName = "_id", nullable = false)
 	private Product product; // Tham chiếu đến Product
 
-	@ElementCollection
-	@Column(nullable = false)
-	private List<String> styleValueIds; // List of selected style value IDs
+	@ElementCollection(fetch = FetchType.EAGER) // EAGER để lấy dữ liệu ngay khi truy vấn
+	@Column(name = "style_value_ids")
+	private List<String> styleValueIds = new ArrayList<>();
 
 	@Column(nullable = false)
 	private int count; // Quantity of the product

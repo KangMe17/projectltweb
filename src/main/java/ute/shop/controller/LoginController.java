@@ -35,6 +35,8 @@ public class LoginController extends HttpServlet {
 		boolean isRememberMe = "on".equals(req.getParameter("remember"));
 
 		String alertMsg = "";
+
+		// Kiểm tra input
 		if (email.isEmpty() || password.isEmpty()) {
 			alertMsg = "Tài khoản hoặc mật khẩu không được rỗng";
 			req.setAttribute("alert", alertMsg);
@@ -42,8 +44,10 @@ public class LoginController extends HttpServlet {
 			return;
 		}
 
+		// Gọi UserService để kiểm tra thông tin đăng nhập
 		IUserService service = new UserServiceImpl();
 		User user = service.login(email, password);
+
 		if (user != null) {
 			// Lưu thông tin người dùng vào session
 			HttpSession session = req.getSession(true);
@@ -55,9 +59,14 @@ public class LoginController extends HttpServlet {
 				saveRemeberMe(resp, email);
 			}
 
-			// Điều hướng đến trang đích chính (ví dụ: trang chủ hoặc dashboard)
-			resp.sendRedirect(req.getContextPath() + "/home"); // Thay "/home" bằng trang đích thực tế
+			// Phân quyền dựa trên role
+			if ("ADMIN".equalsIgnoreCase(user.getRole().toString())) {
+				resp.sendRedirect(req.getContextPath() + "/admin/home"); // Chuyển hướng đến trang admin
+			} else {
+				resp.sendRedirect(req.getContextPath() + "/home"); // Chuyển hướng đến trang người dùng
+			}
 		} else {
+			// Xử lý khi đăng nhập thất bại
 			alertMsg = "Tài khoản hoặc mật khẩu không đúng";
 			req.setAttribute("alert", alertMsg);
 			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);

@@ -74,7 +74,18 @@ public class UserFollowProductDao implements IUserFollowProductDao {
 		EntityManager em = JPAConfig.getEntityManager();
 		try {
 			em.getTransaction().begin();
-			em.remove(em.contains(userFollowProduct) ? userFollowProduct : em.merge(userFollowProduct)); // Xóa khỏi DB
+
+			// Truy vấn chính xác đối tượng trong database
+			UserFollowProduct entity = em.createQuery(
+					"SELECT ufp FROM UserFollowProduct ufp WHERE ufp.user._id = :userId AND ufp.product._id = :productId",
+					UserFollowProduct.class).setParameter("userId", userFollowProduct.getUser().get_id())
+					.setParameter("productId", userFollowProduct.getProduct().get_id()).getSingleResult();
+
+			// Nếu tìm thấy, xóa đối tượng
+			if (entity != null) {
+				em.remove(entity);
+			}
+
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			em.getTransaction().rollback();

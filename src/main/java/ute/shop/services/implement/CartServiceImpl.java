@@ -10,6 +10,7 @@ import ute.shop.entity.Product;
 import ute.shop.entity.User;
 import ute.shop.services.ICartService;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -49,34 +50,36 @@ public class CartServiceImpl implements ICartService {
 
 	@Override
 	public Cart addOrUpdateCartItem(int userId, int productId, int quantity) {
-		Cart cart = findCartByUserId(userId);
+		// Lấy giỏ hàng của người dùng
+		Cart cart = cartDao.findByUserId(userId);
+
 		if (cart == null) {
-			throw new IllegalArgumentException("Giỏ hàng không tồn tại.");
+			// Tạo mới nếu giỏ hàng chưa tồn tại
+			cart = new Cart();
+			cart.setUser(new User(userId));
+			cart.setCartItems(new ArrayList<>());
+			cartDao.save(cart);
 		}
 
-		Product product = productDao.findById(productId);
-		if (product == null) {
-			throw new IllegalArgumentException("Sản phẩm không tồn tại.");
-		}
-
+		// Kiểm tra sản phẩm đã tồn tại trong giỏ chưa
 		CartItem existingItem = cart.getCartItems().stream().filter(item -> item.getProduct().get_id() == productId)
 				.findFirst().orElse(null);
 
 		if (existingItem != null) {
-			existingItem.setCount(quantity); // Cập nhật trực tiếp số lượng
-			existingItem.setUpdatedAt(new Date());
+			// Cập nhật số lượng
+			existingItem.setCount(existingItem.getCount() + quantity);
 		} else {
+			// Tạo mới CartItem
 			CartItem newItem = new CartItem();
 			newItem.setCart(cart);
-			newItem.setProduct(product);
+			newItem.setProduct(new Product(productId));
 			newItem.setCount(quantity);
-			newItem.setCreatedAt(new Date());
-			newItem.setUpdatedAt(new Date());
 			cart.getCartItems().add(newItem);
 		}
 
-		cart.setUpdatedAt(new Date());
-		return cartDao.update(cart);
+		// Lưu giỏ hàng
+		cartDao.update(cart);
+		return cart;
 	}
 
 	@Override

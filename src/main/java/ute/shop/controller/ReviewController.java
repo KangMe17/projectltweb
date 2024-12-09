@@ -132,7 +132,7 @@ public class ReviewController extends HttpServlet {
 			boolean isAdded = reviewService.addReview(review);
 
 			if (isAdded) {
-				resp.sendRedirect(req.getContextPath() + "/reviews?success=added");
+				resp.sendRedirect(req.getContextPath() + "/home/productDetail?id=" + productId);
 			} else {
 				resp.sendRedirect(req.getContextPath() + "/reviews?error=add-failed");
 			}

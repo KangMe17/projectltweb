@@ -88,27 +88,41 @@ public class CartController extends HttpServlet {
 	private void addToCart(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		User currentUser = (User) req.getSession().getAttribute("account");
 
+		// Kiểm tra người dùng đã đăng nhập chưa
 		if (currentUser == null) {
 			resp.sendRedirect(req.getContextPath() + "/login");
 			return;
 		}
 
 		try {
+			// Lấy thông tin từ request
 			int productId = Integer.parseInt(req.getParameter("productId"));
-			int count = Integer.parseInt(req.getParameter("count"));
+			int quantity = Integer.parseInt(req.getParameter("quantity"));
 
-			if (count <= 0) {
+			// Kiểm tra số lượng hợp lệ
+			if (quantity <= 0) {
 				throw new IllegalArgumentException("Số lượng phải lớn hơn 0.");
 			}
 
-			Cart updatedCart = cartService.addOrUpdateCartItem(currentUser.get_id(), productId, count);
+			// Thêm sản phẩm vào giỏ hàng thông qua service
+			Cart updatedCart = cartService.addOrUpdateCartItem(currentUser.get_id(), productId, quantity);
+
+			// Cập nhật giỏ hàng trong session
 			req.getSession().setAttribute("cart", updatedCart);
-			resp.sendRedirect(req.getContextPath() + "/cart/view");
+
+			// Chuyển hướng về trang giỏ hàng
+			resp.sendRedirect(req.getContextPath() + "/cart/view?success=product-added");
 		} catch (NumberFormatException e) {
+			// Xử lý lỗi nếu productId hoặc quantity không phải là số
 			e.printStackTrace();
-			resp.sendRedirect(req.getContextPath() + "/error?message=InvalidInput");
+			resp.sendRedirect(req.getContextPath() + "/error?message=Invalid input format");
 		} catch (IllegalArgumentException e) {
+			// Xử lý lỗi nếu input không hợp lệ
 			resp.sendRedirect(req.getContextPath() + "/error?message=" + e.getMessage());
+		} catch (Exception e) {
+			// Xử lý các lỗi khác
+			e.printStackTrace();
+			resp.sendRedirect(req.getContextPath() + "/error?message=Unexpected error occurred");
 		}
 	}
 
