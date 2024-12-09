@@ -16,7 +16,7 @@
 	<div class="store-list-container">
 		<c:forEach var="store" items="${stores}">
 			<div class="store-card-item">
-				<img src="${store.avatar}" alt="${store.name}"
+				<img src="${pageContext.request.contextPath}/images/store/${store.avatar}" alt="${store.name}"
 					class="store-avatar-image">
 				<h2 class="store-name">${store.name}</h2>
 				<p class="store-bio">${store.bio}</p>

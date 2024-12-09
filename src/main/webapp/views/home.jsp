@@ -102,7 +102,8 @@
 										<div class="productinfo text-center">
 											<a
 												href="${pageContext.request.contextPath}/home/productDetail?id=${product._id}">
-												<img src="Eshopper/images/home/product1.jpg" alt="" />
+												<img src="${pageContext.request.contextPath}/images/product/${product.firstImage}" alt="" 
+												style="width: 268px; height: 249px; object-fit: cover;"/>
 											</a>
 											<h2>${product.price}$</h2>
 											<p>${product.name}</p>
