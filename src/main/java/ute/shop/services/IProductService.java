@@ -21,5 +21,10 @@ public interface IProductService {
 	
 	//admin tim san pham ban chay nhat
 	List<Product> findTopSelling();
+	
+	//admin update product
+	void updateProduct(Product product);
+	void deleteProduct(int id);
+	void addProduct(Product product);
 
 }

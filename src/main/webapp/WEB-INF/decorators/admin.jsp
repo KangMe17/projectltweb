@@ -30,6 +30,24 @@
 	rel="stylesheet" type="text/css">
 <!-- END GLOBAL MANDATORY STYLES -->
 
+
+
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link
+	href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all"
+	rel="stylesheet" type="text/css">
+<link
+	href="${URL}assets/global/plugins/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="${URL}assets/global/plugins/simple-line-icons/simple-line-icons.min.css"
+	rel="stylesheet" type="text/css">
+<link href="${URL}assets/global/plugins/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+<link href="${URL}assets/global/plugins/uniform/css/uniform.default.css"
+	rel="stylesheet" type="text/css">
+<!-- END GLOBAL MANDATORY STYLES -->
+
 <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
 <link rel="stylesheet" type="text/css"
 	href="${URL}assets/global/plugins/select2/select2.css" />
@@ -49,6 +67,16 @@
 <link href="${URL}assets/admin/pages/css/tasks.css" rel="stylesheet"
 	type="text/css" />
 <!-- END PAGE STYLES -->
+
+<!-- BEGIN PAGE LEVEL STYLES -->
+<link
+	href="${URL}assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css"
+	rel="stylesheet" type="text/css" />
+<link href="${URL}assets/admin/pages/css/profile.css" rel="stylesheet"
+	type="text/css" />
+<link href="${URL}assets/admin/pages/css/tasks.css" rel="stylesheet"
+	type="text/css" />
+<!-- END PAGE LEVEL STYLES -->
 
 <!-- BEGIN THEME STYLES -->
 <link href="${URL}assets/global/css/components-rounded.css"
@@ -162,6 +190,17 @@
 	<script
 		src="${URL}assets/global/plugins/flot/jquery.flot.categories.js"
 		type="text/javascript"></script>
+
+
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+	<script
+		src="${URL}assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"
+		type="text/javascript"></script>
+	<script src="${URL}assets/global/plugins/jquery.sparkline.min.js"
+		type="text/javascript"></script>
+	<!-- END PAGE LEVEL PLUGINS -->
+
+
 	<!-- END PAGE LEVEL PLUGINS -->
 
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
@@ -178,6 +217,7 @@
 	<script src="${URL}assets/admin/pages/scripts/tasks.js"
 		type="text/javascript"></script>
 	<script src="${URL}assets/admin/pages/scripts/ecommerce-index.js"></script>
+	<script src="${URL}assets/admin/pages/scripts/profile.js" type="text/javascript"></script>
 	<!-- END PAGE LEVEL SCRIPTS -->
 
 	<script>
@@ -194,6 +234,12 @@
 				Layout.init(); // Init layout
 				Demo.init(); // Init demo features
 				TableAdvanced.init(); // Init advanced table
+			}
+			if ($('#page-user').length > 0) {
+				Metronic.init(); // Init Metronic core components
+				Layout.init(); // Init layout
+				Demo.init(); // Init demo features
+				Profile.init(); // Init advanced table
 			}
 		});
 	</script>

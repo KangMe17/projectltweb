@@ -49,7 +49,11 @@
 								id="sample_2">
 								<thead>
 									<tr>
-										<th>ID</th>
+										<th colspan="5" style="text-align: left;"><a
+											href="${pageContext.request.contextPath}/admin/addProduct" class="btn btn-primary">Add Product</a></th>
+									</tr>
+									<tr>
+										<th>ID Store</th>
 										<th>Name</th>
 										<th>Price</th>
 										<th>Description</th>
@@ -62,13 +66,14 @@
 										<tr>
 											<td>${product.store._id}</td>
 
-											<td>${product.name}</td>
+											<td><a href="productDetails?id=${product._id}">${product.name}</a>
+											</td>
 
 											<td>${product.price}</td>
 
 											<td>${product.description}</td>
 
-											<td>${product.isActive ? 'Yes' : 'No'}</td>
+											<td><a href="deleteProduct?id=${product._id}">${product.isActive ? 'Yes' : 'No'}</a></td>
 
 										</tr>
 
@@ -103,6 +108,10 @@
 							<table class="table table-striped table-bordered table-hover"
 								id="sample_3">
 								<thead>
+								<tr>
+										<th colspan="5" style="text-align: left;"><a
+											href="${pageContext.request.contextPath}/admin/addStore" class="btn btn-primary">Add Store</a></th>
+									</tr>
 									<tr>
 										<th>ID</th>
 										<th>Bio</th>
@@ -115,7 +124,8 @@
 								<tbody>
 									<c:forEach var="store" items="${stoList}">
 										<tr>
-											<td>${store._id}</td>
+											<td><a href="storeDetails?id=${store._id}">${store._id}</a>
+											</td>
 											<td>${store.bio}</td>
 											<td>${store.name}</td>
 											<td>${store.slug}</td>
@@ -167,6 +177,10 @@
 							<table class="table table-striped table-bordered table-hover"
 								id="sample_4">
 								<thead>
+								<tr>
+										<th colspan="5" style="text-align: left;"><a
+											href="${pageContext.request.contextPath}/admin/addUser" class="btn btn-primary">Add User</a></th>
+									</tr>
 									<tr>
 										<th>ID</th>
 										<th>Email</th>
@@ -180,7 +194,8 @@
 									<c:forEach var="user" items="${userList}">
 										<tr>
 											<!-- Hiển thị thông tin của từng user -->
-											<td>${user._id}</td>
+											<td><a href="userDetails?id=${user._id}">${user._id}</a>
+											</td>
 											<!-- ID của người dùng -->
 											<td>${user.email}</td>
 											<!-- Email của người dùng -->

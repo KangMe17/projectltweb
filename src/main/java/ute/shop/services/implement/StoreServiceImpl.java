@@ -4,6 +4,7 @@ import java.util.List;
 
 import ute.shop.dao.IStoreDao;
 import ute.shop.dao.implement.StoreDaoImpl;
+import ute.shop.entity.Commission;
 import ute.shop.entity.Store;
 import ute.shop.services.IStoreService;
 
@@ -33,4 +34,27 @@ public class StoreServiceImpl implements IStoreService {
 		public List<Store> findAll() {
 			return storeDao.findAll();
 		}
+
+		@Override
+		public List<Commission> findAllComission() {
+			return storeDao.findAllComission();
+		}
+
+		@Override
+		public void updateStore(Store store) {
+			storeDao.updateStore(store);
+			
+		}
+
+		@Override
+		public Commission findComById(int comId) {
+			return storeDao.findComById(comId);
+		}
+
+		@Override
+		public void addStore(Store store) {
+			storeDao.addStore(store);
+			
+		}
+		
 }

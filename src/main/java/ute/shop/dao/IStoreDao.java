@@ -2,6 +2,7 @@ package ute.shop.dao;
 
 import java.util.List;
 
+import ute.shop.entity.Commission;
 import ute.shop.entity.Store;
 
 public interface IStoreDao {
@@ -10,4 +11,11 @@ public interface IStoreDao {
 	Store findByOrderId(int orderId);
 	
 	List<Store> findAll();
+	
+	List<Commission> findAllComission();
+	
+	void updateStore(Store store);
+	Commission findComById(int comId);
+	
+	void addStore(Store store);
 }
