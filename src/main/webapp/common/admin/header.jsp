@@ -198,9 +198,36 @@
 						data-hover="dropdown" data-close-others="true"> <img alt=""
 							class="img-circle"
 							src="${URL}assets/admin/layout3/img/avatar9.jpg"> <span
-							class="username username-hide-mobile">Admin dmh</span>
+							class="username username-hide-mobile"> <c:choose>
+									<c:when test="${not empty sessionScope.account}">
+                    Chào, ${sessionScope.account.firstname}
+                </c:when>
+									<c:otherwise>
+                    Khách
+                </c:otherwise>
+								</c:choose>
+						</span>
 					</a>
 						<ul class="dropdown-menu dropdown-menu-default">
+							<c:choose>
+								<c:when test="${not empty sessionScope.account}">
+									<!-- Nếu người dùng đã đăng nhập -->
+									<li><a href="${pageContext.request.contextPath}/logout">
+											<i class="icon-key"></i> Đăng xuất
+									</a></li>
+								</c:when>
+								<c:otherwise>
+									<!-- Nếu người dùng chưa đăng nhập -->
+									<li><a href="${pageContext.request.contextPath}/login">
+											<i class="fa fa-lock"></i> Login
+									</a></li>
+									<li><a
+										href="${pageContext.request.contextPath}/guest/register">
+											<i class="fa fa-user-plus"></i> Register
+									</a></li>
+								</c:otherwise>
+							</c:choose>
+							<li class="divider"></li>
 							<li><a href="extra_profile.html"> <i class="icon-user"></i>
 									My Profile
 							</a></li>
@@ -214,10 +241,8 @@
 							<li><a href="extra_lock.html"> <i class="icon-lock"></i>
 									Lock Screen
 							</a></li>
-							<li><a href="login.html"> <i class="icon-key"></i> Log
-									Out
-							</a></li>
 						</ul></li>
+
 					<!-- END USER LOGIN DROPDOWN -->
 				</ul>
 			</div>

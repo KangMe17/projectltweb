@@ -13,7 +13,7 @@
             <property name="jakarta.persistence.jdbc.url"
                       value="jdbc:mysql://localhost:3306/projectfinal"/>
             <property name="jakarta.persistence.jdbc.user" value="root"/>
-            <property name="jakarta.persistence.jdbc.password" value="11892456Ko4!"/>
+            <property name="jakarta.persistence.jdbc.password" value="dmh123"/>
             <property name="jakarta.persistence.schema-generation.database.action"
                       value="update"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
