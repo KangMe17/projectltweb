@@ -63,6 +63,11 @@
 									placeholder="Max Price ($)" />
 								<button type="submit" class="btn btn-primary">Filter</button>
 							</form>
+							<!-- Hiển thị thông báo lỗi nếu có -->
+							<c:if test="${not empty errorMessage}">
+								<div class="alert alert-danger" style="margin-top: 10px;">
+									${errorMessage}</div>
+							</c:if>
 						</div>
 
 

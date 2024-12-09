@@ -86,7 +86,7 @@
 						<div class="col-sm-5">
 							<div class="view-product">
 								<img
-									src="${pageContext.request.contextPath}/images/shop/1001.jpg"
+									src="${pageContext.request.contextPath}/images/product/${product.firstImage}"
 									alt="" />
 								<h3>ZOOM</h3>
 							</div>

@@ -20,10 +20,7 @@
 		<c:forEach var="followedProduct" items="${followedProducts}">
 			<div
 				style="display: flex; background: #fff; border: 1px solid #ddd; padding: 15px; margin: 10px 0; align-items: center; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-				<img
-					src="${not empty followedProduct.product.listImages ? followedProduct.product.listImages[0] : '/images/default-product.jpg'}"
-					alt="${followedProduct.product.name}"
-					style="width: 100px; height: 100px; object-fit: cover; margin-right: 15px; border-radius: 8px; border: 1px solid #ccc;">
+
 				<div style="flex-grow: 1;">
 					<h3 style="margin: 0; font-size: 1.5em; color: #007bff;">${followedProduct.product.name}</h3>
 					<p style="margin: 8px 0; font-size: 1em; color: #555;">

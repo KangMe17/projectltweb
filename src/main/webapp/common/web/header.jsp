@@ -40,7 +40,7 @@
 			<div class="row">
 				<div class="col-sm-4">
 					<div class="logo pull-left">
-						<a href="/uteshop/home"><img
+						<a href="/UTEShop/home"><img
 							src="${pageContext.request.contextPath}/Eshopper/images/home/logo.png"
 							alt="" /></a>
 					</div>
@@ -71,7 +71,7 @@
 				<div class="col-sm-8">
 					<div class="shop-menu pull-right">
 						<ul class="nav navbar-nav">
-							<li><a href="/uteshop/account"><i class="fa fa-user"></i>
+							<li><a href="/UTEShop/account"><i class="fa fa-user"></i>
 									Account</a></li>
 							<li><a href="/UTEShop/user/followedProducts"><i
 									class="fa fa-star"></i> Wishlist</a></li>
@@ -183,11 +183,11 @@
         const form = document.getElementById("searchForm");
 
         if (searchType === "product") {
-            form.action = `/uteshop/home/searchProduct?keywords=${encodedKeywords}`;
+            form.action = `/UTEShop/home/searchProduct?keywords=${encodedKeywords}`;
         } else if (searchType === "store") {
-            form.action = `/uteshop/home/searchStore?keywords=${encodedKeywords}`;
+            form.action = `/UTEShop/home/searchStore?keywords=${encodedKeywords}`;
         } else if (searchType === "user") {
-            form.action = `/uteshop/home/searchUser?keywords=${encodedKeywords}`;
+            form.action = `/UTEShop/home/searchUser?keywords=${encodedKeywords}`;
         }
 
         // Tiếp tục gửi form

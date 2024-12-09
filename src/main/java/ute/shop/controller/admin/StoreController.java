@@ -113,7 +113,7 @@ public class StoreController extends HttpServlet {
 	        newStore.setE_wallet(1000.9);
 	        
 	        StoreLevel storeLevel = new StoreLevel();
-	        storeLevel.set_id(17); // ID đã tồn tại
+	        storeLevel.set_id(12); // ID đã tồn tại
 	        newStore.setStoreLevel(storeLevel);
 
 			

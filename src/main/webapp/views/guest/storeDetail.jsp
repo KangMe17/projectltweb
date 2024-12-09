@@ -106,7 +106,7 @@ li {
 </head>
 <body>
 	<h1 class="store-title">${store.name}</h1>
-	<img src="${store.avatar}" alt="${store.name}" class="store-avatar">
+	<img src="${pageContext.request.contextPath}/images/store/${store.avatar}" alt="${store.name}" class="store-avatar">
 	<p class="store-bio">${store.bio}</p>
 
 	<h2 class="staff-title">Nhân viên</h2>

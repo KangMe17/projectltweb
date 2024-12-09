@@ -68,8 +68,8 @@
 										<div class="single-products">
 											<div class="productinfo text-center">
 												<img
-													src="${pageContext.request.contextPath}/images/shop/1001.jpg"
-													alt="" style="width: 260px; height: 260px" />
+													src="${pageContext.request.contextPath}/images/product/${product.firstImage}"
+													alt="${product.name}" style="width: 260px; height: 260px" />
 												<h2>${product.price}$</h2>
 												<p>${product.name}</p>
 												<a
