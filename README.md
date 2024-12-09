@@ -23,6 +23,7 @@ Tính năng:
 Trang chi tiết sản phẩm: Hiển thị thông tin chi tiết, đánh giá, bình luận.
 Giỏ hàng:
 Lưu trữ trên cơ sở dữ liệu.
+Thanh toán qua COD, VNPAY, hoặc MOMO.
 Quản lý lịch sử mua hàng theo trạng thái:
 Đơn hàng mới, đã xác nhận, đang giao, đã giao, hủy, trả hàng, hoàn tiền.
 Quản lý profile cá nhân:
