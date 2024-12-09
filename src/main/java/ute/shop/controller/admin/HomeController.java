@@ -29,19 +29,12 @@ public class HomeController extends HttpServlet{
 		IOrderService orser = new OrderServiceImpl();
 		IProductService proser = new ProductServiceImpl();
 		IUserService uservice = new UserServiceImpl();
-	
 		double totalSale = transer.caculatedTotalSale();
 		req.setAttribute("totalSale", totalSale);
 		long totalOrder = orser.countTotalOrders();
 		req.setAttribute("totalOrder", totalOrder);
-		
-		
-		
-		
 		List<Product> proList = proser.findTopSelling();
 		req.setAttribute("proList", proList);
-	
-		
         List<Object[]> topUsers = uservice.findTopUser();
         req.setAttribute("topUsers", topUsers);
     	List<Order> last7order = orser.findLatestOrders();

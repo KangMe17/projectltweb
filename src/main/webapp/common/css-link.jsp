@@ -197,7 +197,7 @@
         display: inline-block;
         margin: 15px 0;
         padding: 10px 15px;
-        background-color: #4CAF50;
+        background-color: #FE980F;
         color: white;
         text-decoration: none;
         border-radius: 5px;
@@ -781,8 +781,78 @@ body {
     margin-top: 20px; /* Khoảng cách phía trên */
 }
 
-/* review  */
+/* Lọc của trang home */
 
+.price-range {
+    background-color: #f9f9f9; /* Màu nền cho phần lọc giá */
+    padding: 20px; /* Padding cho phần lọc giá */
+    border-radius: 8px; /* Bo tròn góc */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bóng cho phần lọc giá */
+    margin-bottom: 20px; /* Khoảng cách dưới phần lọc giá */
+}
+
+.price-range h2 {
+    font-size: 20px; /* Kích thước chữ cho tiêu đề */
+    margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
+    color: #333; /* Màu chữ cho tiêu đề */
+}
+
+.form-control {
+    width: 100%; /* Chiều rộng 100% cho input */
+    padding: 10px; /* Padding cho input */
+    margin-bottom: 10px; /* Khoảng cách dưới input */
+    border: 1px solid #ced4da; /* Đường viền cho input */
+    border-radius: 4px; /* Bo tròn góc cho input */
+    transition: border-color 0.3s; /* Hiệu ứng chuyển màu viền */
+}
+
+.form-control:focus {
+    border-color: #007bff; /* Màu viền khi focus */
+    outline: none; /* Xóa outline mặc định */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Màu nền cho nút lọc */
+    color: white; /* Màu chữ cho nút lọc */
+    border: none; /* Không có viền */
+    padding: 10px 15px; /* Padding cho nút */
+    border-radius: 4px; /* Bo tròn góc cho nút */
+    cursor: pointer; /* Con trỏ khi hover */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+}
+
+.sorting {
+    background-color: #f9f9f9; /* Màu nền cho phần sắp xếp giá */
+    padding: 20px; /* Padding cho phần sắp xếp giá */
+    border-radius: 8px; /* Bo tròn góc */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bóng cho phần sắp xếp giá */
+}
+
+.sorting h2 {
+    font-size: 20px; /* Kích thước chữ cho tiêu đề */
+    margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
+    color: #333; /* Màu chữ cho tiêu đề */
+}
+
+.btn-secondary {
+    background-color: #FE980F; /* Màu nền cho nút sắp xếp */
+    color: white; /* Màu chữ cho nút sắp xếp */
+    border: none; /* Không có viền */
+    padding: 10px 15px; /* Padding cho nút */
+    border-radius: 4px; /* Bo tròn góc cho nút */
+    margin-bottom: 5px; /* Khoảng cách dưới nút */
+    cursor: pointer; /* Con trỏ khi hover */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền */
+    width: 100%; /* Chiều rộng 100% cho nút */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; /* Màu nền khi hover */
+}
 
 
 

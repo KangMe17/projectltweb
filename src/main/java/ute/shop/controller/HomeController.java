@@ -34,28 +34,59 @@ public class HomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Lấy sản phẩm bán từ 10 trở lên, sắp xếp theo số lượng bán
-        List<Product> topProducts = productService.getProductsBySales(10);
-        List<Category> categories = categoryService.getAllCategoriesWithProducts();
-        List<Category> randomCategories = categoryService.getRandomCategories(5);
-        List<Product> products = productService.getProductsByCategory(randomCategories.get(0).get_id());
-        req.setAttribute("randomcategories", randomCategories);
-        req.setAttribute("products", products);
-        req.setAttribute("categories", categories);
+        String sort = req.getParameter("sort");
+        String minPriceStr = req.getParameter("minPrice");
+        String maxPriceStr = req.getParameter("maxPrice");
+
+        List<Product> products;
+
+        if (sort != null) {
+            // Sắp xếp sản phẩm theo giá
+            switch (sort) {
+                case "priceAsc":
+                    products = productService.getProductsSortedByPrice(true); // Giá từ thấp đến cao
+                    break;
+                case "priceDesc":
+                    products = productService.getProductsSortedByPrice(false); // Giá từ cao đến thấp
+                    break;
+                case "sales":
+                    products = productService.getProductsBySales(10); // 10 sản phẩm bán chạy nhất
+                    break;
+                default:
+                    products = productService.getProductsBySales(10); // Mặc định
+            }
+        } else if (minPriceStr != null && maxPriceStr != null) {
+            // Lọc sản phẩm theo khoảng giá
+            try {
+                double minPrice = Double.parseDouble(minPriceStr);
+                double maxPrice = Double.parseDouble(maxPriceStr);
+                products = productService.getProductsByPriceRange(minPrice, maxPrice);
+            } catch (NumberFormatException e) {
+                products = productService.getProductsBySales(10); // Trường hợp không hợp lệ
+            }
+        } else {
+            products = productService.getProductsBySales(10); // Mặc định: sản phẩm bán chạy nhất
+        }
+
         // Gửi danh sách sản phẩm đến giao diện
-        req.setAttribute("topProducts", topProducts);
+        req.setAttribute("products", products);
+        
+        List<Category> randomCategories = categoryService.getRandomCategories(5);
+        req.setAttribute("randomcategories", randomCategories);
+        List<Product> productsCate = productService.getProductsByCategory(randomCategories.get(0).get_id());
+        req.setAttribute("productsCate", productsCate);
 
-        // Xử lý người dùng đăng nhập (nếu có)
+        // Lấy danh mục
+        List<Category> categories = categoryService.getAllCategoriesWithProducts();
+        req.setAttribute("categories", categories);
+
+        // Xử lý người dùng đăng nhập (không thay đổi)
         HttpSession session = req.getSession(false);
-        User user = null;
-        if (session != null) {
-            user = (User) session.getAttribute("account");
-        }
-        if (user != null) {
-            req.setAttribute("user", user);
-        }
+        User user = session != null ? (User) session.getAttribute("account") : null;
+        req.setAttribute("user", user);
 
-        // Forward đến giao diện home.jsp
+        // Forward đến home.jsp
         req.getRequestDispatcher("/views/home.jsp").forward(req, resp);
     }
+
 }
