@@ -24,7 +24,8 @@ public class UserFollowProductController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Lấy userId từ session
+		String action = request.getServletPath();
+
 		User currentUser = (User) request.getSession().getAttribute("account");
 
 		if (currentUser == null) {
@@ -33,72 +34,96 @@ public class UserFollowProductController extends HttpServlet {
 		}
 
 		try {
-			int userId = currentUser.get_id(); // Lấy userId từ session
-			List<UserFollowProduct> followedProducts = userFollowProductService.getFollowedProductsByUserId(userId);
-			request.setAttribute("followedProducts", followedProducts);
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/views/followedProducts.jsp");
-			dispatcher.forward(request, response);
+			switch (action) {
+			case "/user/followedProducts":
+				showFollowedProducts(request, response, currentUser);
+				break;
+			case "/user/unfollow":
+				unfollowProduct(request, response, currentUser);
+				break;
+			default:
+				response.sendError(HttpServletResponse.SC_NOT_FOUND, "Page not found");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unable to fetch followed products.");
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Server error occurred");
+		}
+	}
+
+	private void showFollowedProducts(HttpServletRequest request, HttpServletResponse response, User currentUser)
+			throws ServletException, IOException {
+		int userId = currentUser.get_id(); // Get user ID from session
+		List<UserFollowProduct> followedProducts = userFollowProductService.getFollowedProductsByUserId(userId);
+
+		request.setAttribute("followedProducts", followedProducts);
+
+		// Forward to the followedProducts view
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/views/followedProducts.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void unfollowProduct(HttpServletRequest request, HttpServletResponse response, User currentUser)
+			throws IOException {
+		try {
+			// Lấy `productId` từ request
+			int productId = Integer.parseInt(request.getParameter("productId"));
+
+			// Kiểm tra xem sản phẩm có được người dùng follow hay không
+			if (!userFollowProductService.isProductFollowedByUser(currentUser.get_id(), productId)) {
+				response.sendRedirect(request.getContextPath() + "/user/followedProducts?error=not-followed");
+				return;
+			}
+
+			// Xóa sản phẩm khỏi danh sách yêu thích
+			UserFollowProduct userFollowProduct = new UserFollowProduct();
+			userFollowProduct.setUser(currentUser);
+			userFollowProduct.setProduct(new Product(productId));
+
+			userFollowProductService.unfollowProduct(userFollowProduct);
+
+			// Chuyển hướng về trang danh sách sản phẩm yêu thích
+			response.sendRedirect(request.getContextPath() + "/user/followedProducts?success=unfollowed");
+		} catch (NumberFormatException e) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid productId");
+		} catch (Exception e) {
+			response.sendRedirect(request.getContextPath() + "/user/followedProducts?error=delete-failed");
 		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String userIdParam = request.getParameter("userId");
-		String productIdParam = request.getParameter("productId");
+		// Fetch the logged-in user from the session
+		User currentUser = (User) request.getSession().getAttribute("account");
 
-		if (userIdParam == null || productIdParam == null || userIdParam.isEmpty() || productIdParam.isEmpty()) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "userId and productId are required");
+		if (currentUser == null) {
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
 			return;
 		}
 
-		try {
-			int userId = Integer.parseInt(userIdParam);
-			int productId = Integer.parseInt(productIdParam);
+		String action = request.getParameter("action");
+		if ("unfollow".equals(action)) {
+			unfollowProduct(request, response, currentUser);
+		} else {
+			try {
+				int userId = currentUser.get_id(); // Get user ID from session
+				int productId = Integer.parseInt(request.getParameter("productId"));
 
-			if (userFollowProductService.isProductFollowedByUser(userId, productId)) {
-				response.sendRedirect("/user/followedProducts?userId=" + userId + "&error=already-followed");
-				return;
+				if (userFollowProductService.isProductFollowedByUser(userId, productId)) {
+					response.sendRedirect(request.getContextPath() + "/user/followedProducts?error=already-followed");
+					return;
+				}
+
+				UserFollowProduct userFollowProduct = new UserFollowProduct();
+				userFollowProduct.setUser(currentUser);
+				userFollowProduct.setProduct(new Product(productId));
+
+				userFollowProductService.followProduct(userFollowProduct);
+				response.sendRedirect(request.getContextPath() + "/user/followedProducts?success=followed");
+			} catch (NumberFormatException e) {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid productId");
 			}
-
-			UserFollowProduct userFollowProduct = new UserFollowProduct();
-			userFollowProduct.setUser(new User(userId));
-			userFollowProduct.setProduct(new Product(productId));
-
-			userFollowProductService.followProduct(userFollowProduct);
-			response.sendRedirect("/user/followedProducts?userId=" + userId + "&success=followed");
-		} catch (NumberFormatException e) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid userId or productId");
 		}
 	}
 
-	@Override
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String userIdParam = request.getParameter("userId");
-		String productIdParam = request.getParameter("productId");
-
-		if (userIdParam == null || productIdParam == null || userIdParam.isEmpty() || productIdParam.isEmpty()) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "userId and productId are required");
-			return;
-		}
-
-		try {
-			int userId = Integer.parseInt(userIdParam);
-			int productId = Integer.parseInt(productIdParam);
-
-			UserFollowProduct userFollowProduct = new UserFollowProduct();
-			userFollowProduct.setUser(new User(userId));
-			userFollowProduct.setProduct(new Product(productId));
-
-			userFollowProductService.unfollowProduct(userFollowProduct);
-			response.sendRedirect("/user/followedProducts?userId=" + userId + "&success=unfollowed");
-		} catch (NumberFormatException e) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid userId or productId");
-		}
-	}
 }

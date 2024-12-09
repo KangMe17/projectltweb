@@ -130,11 +130,20 @@
 							<p>Mô tả: ${product.description}</p>
 							<img
 								src="${pageContext.request.contextPath}/images/product-details/rating.png"
-								alt="" /> <span> <span>US $${product.price}</span> <label>Quantity:</label>
-								<input type="text" value="3" /> <a class="btn btn-fefault cart"
-								href="/home/cart/add/${pr.id}"> <i
-									class="fa fa -shopping-cart"></i> Add to cart
-							</a>
+								alt="" /> <span> <span>US $${product.price}</span>
+								<form action="${pageContext.request.contextPath}/cart/add"
+									method="POST">
+									<input type="hidden" name="productId" value="${product._id}">
+									<div class="form-group">
+										<label for="quantity-${product._id}">Quantity:</label> <input
+											type="number" id="quantity-${product._id}" name="quantity"
+											value="1" min="1" class="form-control" required>
+									</div>
+									<button type="submit" class="btn btn-fefault cart">
+										<i class="fa fa-shopping-cart"></i> Add to cart
+									</button>
+								</form>
+
 							</span>
 							<p>
 								<strong>Còn lại:</strong> ${product.quantity} sản phẩm
@@ -145,6 +154,15 @@
 							<p>
 								<strong>Đã bán:</strong> ${product.sold}
 							</p>
+							<form action="${pageContext.request.contextPath}/user/follow"
+								method="POST">
+								<input type="hidden" name="userId"
+									value="${sessionScope.account._id}"> <input
+									type="hidden" name="productId" value="${product._id}">
+								<button type="submit" class="btn btn-fefault cart">
+									<i class="fa fa-heart"></i> Follow Product
+								</button>
+							</form>
 							<a href=""><img
 								src="${pageContext.request.contextPath}/images/product-details/share.png"
 								class="share img-responsive" alt="" /></a>

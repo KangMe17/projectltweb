@@ -12,4 +12,9 @@ public interface IProductDao {
 	
 	//@dmhisdmh admin
 	List<Product> findTopSelling();
+	
+	//@admin
+	void updateProduct(Product product);
+	void deleteProduct(int id);
+	void addProduct(Product product);
 }

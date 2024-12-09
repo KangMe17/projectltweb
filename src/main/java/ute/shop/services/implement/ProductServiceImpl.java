@@ -45,4 +45,19 @@ public class ProductServiceImpl implements IProductService {
 	public List<Product> findTopSelling() {
 		return productDao.findTopSelling();
 	}
+
+	@Override
+	public void updateProduct(Product product) {
+		productDao.updateProduct(product);
+	}
+
+	@Override
+	public void deleteProduct(int id) {
+		productDao.deleteProduct(id);
+	}
+
+	@Override
+	public void addProduct(Product product) {
+		productDao.addProduct(product);	
+	}
 }
