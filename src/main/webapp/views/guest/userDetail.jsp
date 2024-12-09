@@ -21,7 +21,7 @@
             <p class="user-detail-item"><span class="user-detail-label">Role:</span> ${user.role}</p>
             <p class="user-detail-item"><span class="user-detail-label">Email Verified:</span> ${user.isEmailActive ? "Yes" : "No"}</p>
             <p class="user-detail-item"><span class="user-detail-label">Phone Verified:</span> ${user.isPhoneActive ? "Yes" : "No"}</p>
-            <img src="${user.avatar}" alt="Avatar" class="user-avatar">
+            <img src="${pageContext.request.contextPath}/images/user/${user.avatar}" alt="Avatar" class="user-avatar">
         </div>
         <a href="${pageContext.request.contextPath}/home/searchUser?keywords=${keywords}" class="back-link">Quay về trang danh sách tìm kiếm</a>
     </c:if>

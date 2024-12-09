@@ -90,6 +90,11 @@ public class Product {
 	protected void onUpdate() {
 		updatedAt = new Date();
 	}
+	
+	public String getFirstImage() {
+	    return listImages != null && !listImages.isEmpty() ? listImages.get(0) : "default.jpg";
+	}
+
 
 	// Example method to generate slug
 	private String generateSlug(String name) {
