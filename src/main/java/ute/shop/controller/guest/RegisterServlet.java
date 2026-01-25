@@ -12,7 +12,8 @@ import ute.shop.config.JPAConfig;
 import ute.shop.dao.guest.implement.UserDAO;
 import ute.shop.entity.User;
 import ute.shop.services.guest.implement.UserService;
-
+import ute.shop.utils.md5;
+import ute.shop.utils.BCryptUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -55,11 +56,12 @@ public class RegisterServlet extends HttpServlet {
             request.getRequestDispatcher("/views/register.jsp").forward(request, response);
             return;
         }
+        String hashedPassword = md5.md5Hex(password);
 
         // Tạo đối tượng User mới
         User newUser = new User();
         newUser.setEmail(email);
-        newUser.setPassword(password);
+        newUser.setPassword(hashedPassword);
         newUser.setFirstname(firstname);
         newUser.setLastname(lastname);
 

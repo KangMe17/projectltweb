@@ -112,9 +112,13 @@
 											</a>
 											<h2>${product.price}$</h2>
 											<p>${product.name}</p>
-											<a href="#" class="btn btn-default add-to-cart"> <i
-												class="fa fa-shopping-cart"></i>Add to cart
-											</a>
+											<form action="${pageContext.request.contextPath}/cart/add" method="post" style="display:inline;">
+  													<input type="hidden" name="productId" value="${product._id}" />
+  													<input type="hidden" name="quantity" value="1" />
+  													<button type="submit" class="btn btn-default add-to-cart">
+   											 <i class="fa fa-shopping-cart"></i>Add to cart
+  												</button>
+											</form>
 										</div>
 									</div>
 									<div class="choose">
@@ -168,7 +172,7 @@
 														href="${pageContext.request.contextPath}/home/productDetail?id=${product._id}">
 															<i class="fa fa-plus-square"></i>Views Details
 													</a></li>
-													<li><a href="/home/cart/add/${product._id}"> <i
+													<li><a href="${pageContext.request.contextPath}/home/cart/add/${product._id}"> <i
 															class="fa fa-plus-square"></i>Add to cart
 													</a></li>
 												</ul>
@@ -307,7 +311,7 @@
 	<script>
 function loadProducts(categoryId) {
 	$.ajax({
-		url: '/home/productsByCategory', // URL đến API backend
+		url: '${pageContext.request.contextPath}/home/productsByCategory', // URL đến API backend
 		type: 'GET',
 		data: { categoryId: categoryId },
 		success: function(response) {

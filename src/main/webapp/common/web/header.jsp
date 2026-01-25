@@ -14,7 +14,7 @@
 							<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88
 									821</a></li>
 							<li><a href="#"><i class="fa fa-envelope"></i>
-									khang.lor@domain.com</a></li>
+									ht.lama@domain.com</a></li>
 						</ul>
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 			<div class="row">
 				<div class="col-sm-4">
 					<div class="logo pull-left">
-						<a href="/UTEShop/home"><img
+						<a href="${pageContext.request.contextPath}/home"><img
 							src="${pageContext.request.contextPath}/Eshopper/images/home/logo.png"
 							alt="" /></a>
 					</div>
@@ -71,13 +71,13 @@
 				<div class="col-sm-8">
 					<div class="shop-menu pull-right">
 						<ul class="nav navbar-nav">
-							<li><a href="/UTEShop/account"><i class="fa fa-user"></i>
+							<li><a href="${pageContext.request.contextPath}/account"><i class="fa fa-user"></i>
 									Account</a></li>
-							<li><a href="/UTEShop/user/followedProducts"><i
+							<li><a href="${pageContext.request.contextPath}/user/followedProducts"><i
 									class="fa fa-star"></i> Wishlist</a></li>
-							<li><a href="/UTEShop/orders"><i
+							<li><a href="${pageContext.request.contextPath}/orders"><i
 									class="fa fa-crosshairs"></i> Checkout</a></li>
-							<li><a href="/UTEShop/cart"><i
+							<li><a href="${pageContext.request.contextPath}/cart"><i
 									class="fa fa-shopping-cart"></i> Cart</a></li>
 							<li><c:choose>
 									<c:when test="${not empty sessionScope.account}">
@@ -142,7 +142,8 @@
 				<div class="col-sm-3">
 					<div class="search_box pull-right">
 						<form id="searchForm" method="get"
-							onsubmit="return prepareSearchUrl()">
+							onsubmit="return prepareSearchUrl()"
+							action="${pageContext.request.contextPath}/home/searchProduct">
 							<!-- Input từ khóa -->
 							<input id="keywords" name="keywords" placeholder="Keywords?"
 								required>
@@ -168,29 +169,29 @@
 </header>
 <!--/header-->
 <script>
-    function prepareSearchUrl() {
-        const searchType = document.getElementById("searchType").value;
-        const keywords = document.getElementById("keywords").value.trim();
-
-        // Kiểm tra nếu từ khóa trống
-        if (!keywords) {
-            alert("Vui lòng nhập từ khóa.");
-            return false;
-        }
-
-        // Mã hóa từ khóa và thiết lập URL phù hợp
-        const encodedKeywords = encodeURIComponent(keywords);
-        const form = document.getElementById("searchForm");
-
-        if (searchType === "product") {
-            form.action = `/UTEShop/home/searchProduct?keywords=${encodedKeywords}`;
-        } else if (searchType === "store") {
-            form.action = `/UTEShop/home/searchStore?keywords=${encodedKeywords}`;
-        } else if (searchType === "user") {
-            form.action = `/UTEShop/home/searchUser?keywords=${encodedKeywords}`;
-        }
-
-        // Tiếp tục gửi form
-        return true;
+  function prepareSearchUrl() {
+    const keywords = document.getElementById("keywords").value.trim();
+    if (!keywords) {
+      alert("Vui lòng nhập từ khóa.");
+      return false;
     }
+
+    const searchType = document.getElementById("searchType").value;
+    const form = document.getElementById("searchForm");
+    const ctx = '${pageContext.request.contextPath}';
+
+    if (searchType === "product") {
+      form.action = ctx + "/home/searchProduct";
+    } else if (searchType === "store") {
+      form.action = ctx + "/home/searchStore";
+    } else if (searchType === "user") {
+      form.action = ctx + "/home/searchUser";
+    }
+
+    // KHÔNG gắn keywords vào action nữa
+    // vì input name="keywords" sẽ tự lên query string khi method="get"
+    return true;
+  }
 </script>
+
+

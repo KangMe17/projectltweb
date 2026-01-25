@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="path/to/your/styles.css">
 <!-- Link file CSS -->
 </head>
+
 <body>
 	<div class="form_wrapper">
 		<div class="form_container">
@@ -22,7 +23,7 @@
 				</div>
 			</c:if>
 			<div class="row clearfix">
-				<form action="/UTEShop/login" method="post">
+				<form action="${pageContext.request.contextPath}/login" method="post">
 					<div class="input_field">
 						<span><i aria-hidden="true" class="fa fa-envelope"></i></span> <input
 							type="email" name="email" placeholder="Email Address" required />

@@ -66,24 +66,23 @@ public class CartController extends HttpServlet {
 	}
 
 	private void viewCart(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		User currentUser = (User) req.getSession().getAttribute("account");
+	    User currentUser = (User) req.getSession().getAttribute("account");
+	    if (currentUser == null) {
+	        resp.sendRedirect(req.getContextPath() + "/login");
+	        return;
+	    }
 
-		if (currentUser == null) {
-			resp.sendRedirect(req.getContextPath() + "/login");
-			return;
-		}
+	    Cart cart = cartService.findCartByUserId(currentUser.get_id()); // không throw
 
-		// Lấy Cart và Store ID
-		Cart cart = cartService.getCartByUser(currentUser);
-		Integer storeId = storeService.getStoreIdByUserId(currentUser.get_id());
+	    if (cart == null) {
+	        cart = new Cart();
+	        cart.setCartItems(new java.util.ArrayList<>()); // giỏ trống để JSP render
+	    }
 
-		// Đặt vào session và request
-		req.getSession().setAttribute("storeId", storeId);
-		req.setAttribute("cart", cart);
-		req.setAttribute("storeId", storeId);
-
-		req.getRequestDispatcher("/views/cart.jsp").forward(req, resp);
+	    req.setAttribute("cart", cart);
+	    req.getRequestDispatcher("/views/cart.jsp").forward(req, resp);
 	}
+
 
 	private void addToCart(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		User currentUser = (User) req.getSession().getAttribute("account");

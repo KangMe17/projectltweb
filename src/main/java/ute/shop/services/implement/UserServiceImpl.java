@@ -2,6 +2,7 @@ package ute.shop.services.implement;
 
 import java.util.List;
 
+import ute.shop.utils.BCryptUtils;
 import ute.shop.dao.IUserDao;
 import ute.shop.dao.implement.UserDaoImpl;
 import ute.shop.entity.User;
@@ -64,5 +65,21 @@ public class UserServiceImpl implements IUserService {
 		
 		return userDao.findTopUser();
 	}
-
+/*
+	@Override
+	public User login1(String email, String rawPassword) {
+		try {
+			User user = userDao.findByEmail(email);
+			if (user == null) {
+				throw new RuntimeException("Email does not exist");
+			}
+			if (!BCryptUtils.checkPassword(rawPassword, user.getPassword())) {
+				throw new RuntimeException("Invalid password");
+			}
+			return user; // Successful login
+		} catch (Exception e) {
+			throw new RuntimeException("Error during login", e);
+		}
+	}
+*/
 }

@@ -23,7 +23,7 @@ public class Product {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int _id;
 
 	@Column(nullable = false, length = 100)

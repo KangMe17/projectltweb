@@ -137,21 +137,7 @@
 		$('.image-upload-wrap').removeClass('image-dropping');
 	});
 	
-	
-	function loadProducts(categoryId) {
-		$.ajax({
-			url: '/home/productsByCategory', // URL đến API backend
-			type: 'GET',
-			data: { categoryId: categoryId },
-			success: function(response) {
-				// Cập nhật danh sách sản phẩm
-				$('#products-container').html(response);
-			},
-			error: function(err) {
-				console.error('Error loading products:', err);
-			}
-		});
-	}
+
 </script>
 
 

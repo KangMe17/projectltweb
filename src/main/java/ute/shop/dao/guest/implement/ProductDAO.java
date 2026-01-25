@@ -98,10 +98,14 @@ public class ProductDAO {
     }
     
     public List<Product> getProductsByCategory(int categoryId) {
-        TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.category.id = :categoryId", Product.class);
+        TypedQuery<Product> query = em.createQuery(
+            "SELECT p FROM Product p WHERE p.category._id = :categoryId",
+            Product.class
+        );
         query.setParameter("categoryId", categoryId);
         return query.getResultList();
     }
+
     public List<Product> getProductsSortedByPriceAsc() {
         return em.createQuery("SELECT p FROM Product p ORDER BY p.price ASC", Product.class)
                  .getResultList();
